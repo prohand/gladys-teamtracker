@@ -14,6 +14,9 @@
 #
 # That is ALL it takes to "publish": tag, push, and the decentralized indexer
 # does the rest (no review, no account to create).
+#
+# The first image pushed creates a PRIVATE package on ghcr.io: make it public
+# once (Package settings -> Change visibility), or Gladys cannot pull it.
 # -----------------------------------------------------------------------------
 name: Build and publish image
 
