@@ -1,0 +1,1111 @@
+{
+  "manifest_version": 1,
+  "type": "device",
+  "name": "Team Tracker",
+  "description": {
+    "en": "Follow your sports teams: live scores, next match, and scenes when your team scores.",
+    "fr": "Suivez vos équipes : scores en direct, prochain match et scènes quand votre équipe marque."
+  },
+  "version": "1.0.0",
+  "docker_image": "ghcr.io/prohand/gladys-teamtracker:1.0.0",
+  "gladys_version": ">=5.1.0",
+  "cover_image": "https://raw.githubusercontent.com/prohand/gladys-teamtracker/main/cover.png",
+  "categories": ["services", "multimedia"],
+  "transports": ["cloud"],
+  "config_schema": [
+    {
+      "key": "intro",
+      "type": "section",
+      "label": {
+        "en": "Getting started",
+        "fr": "Pour commencer"
+      },
+      "description": {
+        "en": "Scores come from the public ESPN API: no account, no key. Write the teams to follow as LEAGUE:TEAM, separated by commas, e.g. LIG1:PSG, TOP14:RAC, NFL:KC. Not sure of the abbreviation? Use the \"Find a team\" button below. Each team becomes a device in the Discovery tab.",
+        "fr": "Les scores viennent de l'API publique d'ESPN : pas de compte, pas de clé. Écrivez les équipes à suivre sous la forme LIGUE:ÉQUIPE, séparées par des virgules, par ex. LIG1:PSG, TOP14:RAC, NFL:KC. Pas sûr de l'abréviation ? Utilisez le bouton « Trouver une équipe » plus bas. Chaque équipe devient un appareil dans l'onglet Découverte."
+      },
+      "links": [
+        {
+          "url": "https://github.com/prohand/gladys-teamtracker/blob/main/docs/en.md#leagues",
+          "label": {
+            "en": "League codes",
+            "fr": "Codes des ligues"
+          }
+        }
+      ]
+    },
+    {
+      "key": "teams",
+      "type": "string",
+      "label": {
+        "en": "Teams",
+        "fr": "Équipes"
+      },
+      "description": {
+        "en": "LEAGUE:TEAM entries separated by commas (20 at most). The team is its abbreviation or its ESPN id.",
+        "fr": "Entrées LIGUE:ÉQUIPE séparées par des virgules (20 au plus). L'équipe est son abréviation ou son identifiant ESPN."
+      },
+      "placeholder": {
+        "en": "e.g. LIG1:PSG, NFL:KC",
+        "fr": "ex. LIG1:PSG, NFL:KC"
+      },
+      "required": true
+    },
+    {
+      "key": "language",
+      "type": "select",
+      "label": {
+        "en": "Language of the match texts",
+        "fr": "Langue des textes de match"
+      },
+      "description": {
+        "en": "Language of the \"Match\" text shown on the devices and sent to the scenes.",
+        "fr": "Langue du texte « Match » affiché sur les appareils et envoyé aux scènes."
+      },
+      "required": false,
+      "default": "en",
+      "display": "radio",
+      "options": [
+        {
+          "value": "en",
+          "label": {
+            "en": "English",
+            "fr": "Anglais"
+          }
+        },
+        {
+          "value": "fr",
+          "label": {
+            "en": "French",
+            "fr": "Français"
+          }
+        }
+      ]
+    },
+    {
+      "key": "timezone",
+      "type": "string",
+      "label": {
+        "en": "Time zone",
+        "fr": "Fuseau horaire"
+      },
+      "description": {
+        "en": "Kickoff times are written in this time zone (IANA name).",
+        "fr": "Les heures de coup d'envoi sont écrites dans ce fuseau (nom IANA)."
+      },
+      "placeholder": {
+        "en": "e.g. America/New_York",
+        "fr": "ex. Europe/Paris"
+      },
+      "required": false,
+      "default": "Europe/Paris"
+    },
+    {
+      "key": "reminder_minutes",
+      "type": "number",
+      "label": {
+        "en": "Kickoff reminder (min)",
+        "fr": "Rappel avant le coup d'envoi (min)"
+      },
+      "description": {
+        "en": "The \"Match starting soon\" trigger fires this many minutes before kickoff. 0 turns it off.",
+        "fr": "Le déclencheur « Match bientôt » part ce nombre de minutes avant le coup d'envoi. 0 le désactive."
+      },
+      "required": false,
+      "default": 30,
+      "min": 0,
+      "max": 1440
+    },
+    {
+      "key": "live_refresh",
+      "type": "number",
+      "label": {
+        "en": "Refresh during a match (s)",
+        "fr": "Actualisation pendant un match (s)"
+      },
+      "description": {
+        "en": "How often scores are read while a match is live, in seconds.",
+        "fr": "Fréquence de lecture des scores pendant un match, en secondes."
+      },
+      "required": false,
+      "default": 30,
+      "min": 15,
+      "max": 300
+    },
+    {
+      "key": "idle_refresh",
+      "type": "number",
+      "label": {
+        "en": "Refresh between matches (min)",
+        "fr": "Actualisation entre les matchs (min)"
+      },
+      "description": {
+        "en": "How often the next matches are checked when nothing is live, in minutes.",
+        "fr": "Fréquence de vérification des prochains matchs quand rien n'est en direct, en minutes."
+      },
+      "required": false,
+      "default": 15,
+      "min": 5,
+      "max": 120
+    }
+  ],
+  "actions": [
+    {
+      "key": "test_teams",
+      "label": {
+        "en": "Test the teams",
+        "fr": "Tester les équipes"
+      },
+      "description": {
+        "en": "Read ESPN now and show, team by team, what is followed.",
+        "fr": "Lit ESPN maintenant et montre, équipe par équipe, ce qui est suivi."
+      },
+      "timeout_seconds": 60
+    },
+    {
+      "key": "find_team",
+      "label": {
+        "en": "Find a team",
+        "fr": "Trouver une équipe"
+      },
+      "description": {
+        "en": "List the teams of a league with the exact text to paste in the Teams field.",
+        "fr": "Liste les équipes d'une ligue avec le texte exact à coller dans le champ Équipes."
+      },
+      "timeout_seconds": 30,
+      "fields": [
+        {
+          "key": "league",
+          "type": "select",
+          "label": {
+            "en": "League",
+            "fr": "Ligue"
+          },
+          "required": true,
+          "options": [
+            {
+              "value": "LIG1",
+              "label": {
+                "en": "Ligue 1 (LIG1)",
+                "fr": "Ligue 1 (LIG1)"
+              }
+            },
+            {
+              "value": "LIG2",
+              "label": {
+                "en": "Ligue 2 (LIG2)",
+                "fr": "Ligue 2 (LIG2)"
+              }
+            },
+            {
+              "value": "CDF",
+              "label": {
+                "en": "Coupe de France (CDF)",
+                "fr": "Coupe de France (CDF)"
+              }
+            },
+            {
+              "value": "D1F",
+              "label": {
+                "en": "Première Ligue (D1F)",
+                "fr": "Première Ligue (D1F)"
+              }
+            },
+            {
+              "value": "EPL",
+              "label": {
+                "en": "Premier League (EPL)",
+                "fr": "Premier League (EPL)"
+              }
+            },
+            {
+              "value": "LIGA",
+              "label": {
+                "en": "LaLiga (LIGA)",
+                "fr": "LaLiga (LIGA)"
+              }
+            },
+            {
+              "value": "SERA",
+              "label": {
+                "en": "Serie A (SERA)",
+                "fr": "Serie A (SERA)"
+              }
+            },
+            {
+              "value": "BUND",
+              "label": {
+                "en": "Bundesliga (BUND)",
+                "fr": "Bundesliga (BUND)"
+              }
+            },
+            {
+              "value": "CL",
+              "label": {
+                "en": "Champions League (CL)",
+                "fr": "Champions League (CL)"
+              }
+            },
+            {
+              "value": "EL",
+              "label": {
+                "en": "Europa League (EL)",
+                "fr": "Europa League (EL)"
+              }
+            },
+            {
+              "value": "ECL",
+              "label": {
+                "en": "Conference League (ECL)",
+                "fr": "Conference League (ECL)"
+              }
+            },
+            {
+              "value": "MLS",
+              "label": {
+                "en": "MLS (MLS)",
+                "fr": "MLS (MLS)"
+              }
+            },
+            {
+              "value": "NWSL",
+              "label": {
+                "en": "NWSL (NWSL)",
+                "fr": "NWSL (NWSL)"
+              }
+            },
+            {
+              "value": "WC",
+              "label": {
+                "en": "FIFA World Cup (WC)",
+                "fr": "FIFA World Cup (WC)"
+              }
+            },
+            {
+              "value": "WWC",
+              "label": {
+                "en": "FIFA Women's World Cup (WWC)",
+                "fr": "FIFA Women's World Cup (WWC)"
+              }
+            },
+            {
+              "value": "TOP14",
+              "label": {
+                "en": "Top 14 (TOP14)",
+                "fr": "Top 14 (TOP14)"
+              }
+            },
+            {
+              "value": "SIXN",
+              "label": {
+                "en": "Six Nations (SIXN)",
+                "fr": "Six Nations (SIXN)"
+              }
+            },
+            {
+              "value": "RWC",
+              "label": {
+                "en": "Rugby World Cup (RWC)",
+                "fr": "Rugby World Cup (RWC)"
+              }
+            },
+            {
+              "value": "NFL",
+              "label": {
+                "en": "NFL (NFL)",
+                "fr": "NFL (NFL)"
+              }
+            },
+            {
+              "value": "NCAAF",
+              "label": {
+                "en": "NCAA Football (NCAAF)",
+                "fr": "NCAA Football (NCAAF)"
+              }
+            },
+            {
+              "value": "NBA",
+              "label": {
+                "en": "NBA (NBA)",
+                "fr": "NBA (NBA)"
+              }
+            },
+            {
+              "value": "WNBA",
+              "label": {
+                "en": "WNBA (WNBA)",
+                "fr": "WNBA (WNBA)"
+              }
+            },
+            {
+              "value": "NCAAM",
+              "label": {
+                "en": "NCAA Men (NCAAM)",
+                "fr": "NCAA Men (NCAAM)"
+              }
+            },
+            {
+              "value": "NCAAW",
+              "label": {
+                "en": "NCAA Women (NCAAW)",
+                "fr": "NCAA Women (NCAAW)"
+              }
+            },
+            {
+              "value": "NHL",
+              "label": {
+                "en": "NHL (NHL)",
+                "fr": "NHL (NHL)"
+              }
+            },
+            {
+              "value": "MLB",
+              "label": {
+                "en": "MLB (MLB)",
+                "fr": "MLB (MLB)"
+              }
+            }
+          ]
+        },
+        {
+          "key": "search",
+          "type": "string",
+          "label": {
+            "en": "Search",
+            "fr": "Recherche"
+          },
+          "placeholder": {
+            "en": "e.g. Paris",
+            "fr": "ex. Paris"
+          },
+          "required": false
+        }
+      ]
+    }
+  ],
+  "scene_triggers": [
+    {
+      "key": "match_soon",
+      "label": {
+        "en": "Match starting soon",
+        "fr": "Match bientôt"
+      },
+      "description": {
+        "en": "A followed team plays soon (kickoff reminder of the configuration).",
+        "fr": "Une équipe suivie joue bientôt (rappel avant le coup d'envoi de la configuration)."
+      },
+      "fields": [
+        {
+          "key": "team",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Team",
+            "fr": "Équipe"
+          }
+        },
+        {
+          "key": "home_away",
+          "type": "select",
+          "label": {
+            "en": "Home or away",
+            "fr": "Domicile ou extérieur"
+          },
+          "options": [
+            {
+              "value": "home",
+              "label": {
+                "en": "Home",
+                "fr": "Domicile"
+              }
+            },
+            {
+              "value": "away",
+              "label": {
+                "en": "Away",
+                "fr": "Extérieur"
+              }
+            }
+          ]
+        }
+      ],
+      "variables": [
+        {
+          "key": "team_name",
+          "type": "string",
+          "label": {
+            "en": "Team",
+            "fr": "Équipe"
+          }
+        },
+        {
+          "key": "opponent",
+          "type": "string",
+          "label": {
+            "en": "Opponent",
+            "fr": "Adversaire"
+          }
+        },
+        {
+          "key": "home_away",
+          "type": "string",
+          "label": {
+            "en": "Home or away (home, away)",
+            "fr": "Domicile ou extérieur (home, away)"
+          }
+        },
+        {
+          "key": "league",
+          "type": "string",
+          "label": {
+            "en": "League",
+            "fr": "Ligue"
+          }
+        },
+        {
+          "key": "team_score",
+          "type": "number",
+          "label": {
+            "en": "Team score",
+            "fr": "Score de l'équipe"
+          }
+        },
+        {
+          "key": "opponent_score",
+          "type": "number",
+          "label": {
+            "en": "Opponent score",
+            "fr": "Score adverse"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé"
+          }
+        },
+        {
+          "key": "kickoff",
+          "type": "string",
+          "label": {
+            "en": "Kickoff (ISO date)",
+            "fr": "Coup d'envoi (date ISO)"
+          }
+        },
+        {
+          "key": "minutes",
+          "type": "number",
+          "label": {
+            "en": "Minutes before kickoff",
+            "fr": "Minutes avant le coup d'envoi"
+          }
+        }
+      ]
+    },
+    {
+      "key": "match_started",
+      "label": {
+        "en": "Match started",
+        "fr": "Match commencé"
+      },
+      "description": {
+        "en": "A match of a followed team has started.",
+        "fr": "Un match d'une équipe suivie a commencé."
+      },
+      "fields": [
+        {
+          "key": "team",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Team",
+            "fr": "Équipe"
+          }
+        },
+        {
+          "key": "home_away",
+          "type": "select",
+          "label": {
+            "en": "Home or away",
+            "fr": "Domicile ou extérieur"
+          },
+          "options": [
+            {
+              "value": "home",
+              "label": {
+                "en": "Home",
+                "fr": "Domicile"
+              }
+            },
+            {
+              "value": "away",
+              "label": {
+                "en": "Away",
+                "fr": "Extérieur"
+              }
+            }
+          ]
+        }
+      ],
+      "variables": [
+        {
+          "key": "team_name",
+          "type": "string",
+          "label": {
+            "en": "Team",
+            "fr": "Équipe"
+          }
+        },
+        {
+          "key": "opponent",
+          "type": "string",
+          "label": {
+            "en": "Opponent",
+            "fr": "Adversaire"
+          }
+        },
+        {
+          "key": "home_away",
+          "type": "string",
+          "label": {
+            "en": "Home or away (home, away)",
+            "fr": "Domicile ou extérieur (home, away)"
+          }
+        },
+        {
+          "key": "league",
+          "type": "string",
+          "label": {
+            "en": "League",
+            "fr": "Ligue"
+          }
+        },
+        {
+          "key": "team_score",
+          "type": "number",
+          "label": {
+            "en": "Team score",
+            "fr": "Score de l'équipe"
+          }
+        },
+        {
+          "key": "opponent_score",
+          "type": "number",
+          "label": {
+            "en": "Opponent score",
+            "fr": "Score adverse"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé"
+          }
+        }
+      ]
+    },
+    {
+      "key": "team_scored",
+      "label": {
+        "en": "My team scored",
+        "fr": "Mon équipe a marqué"
+      },
+      "description": {
+        "en": "A followed team scored (a goal, a try, a touchdown, a basket…).",
+        "fr": "Une équipe suivie a marqué (but, essai, touchdown, panier…)."
+      },
+      "fields": [
+        {
+          "key": "team",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Team",
+            "fr": "Équipe"
+          }
+        },
+        {
+          "key": "home_away",
+          "type": "select",
+          "label": {
+            "en": "Home or away",
+            "fr": "Domicile ou extérieur"
+          },
+          "options": [
+            {
+              "value": "home",
+              "label": {
+                "en": "Home",
+                "fr": "Domicile"
+              }
+            },
+            {
+              "value": "away",
+              "label": {
+                "en": "Away",
+                "fr": "Extérieur"
+              }
+            }
+          ]
+        }
+      ],
+      "variables": [
+        {
+          "key": "team_name",
+          "type": "string",
+          "label": {
+            "en": "Team",
+            "fr": "Équipe"
+          }
+        },
+        {
+          "key": "opponent",
+          "type": "string",
+          "label": {
+            "en": "Opponent",
+            "fr": "Adversaire"
+          }
+        },
+        {
+          "key": "home_away",
+          "type": "string",
+          "label": {
+            "en": "Home or away (home, away)",
+            "fr": "Domicile ou extérieur (home, away)"
+          }
+        },
+        {
+          "key": "league",
+          "type": "string",
+          "label": {
+            "en": "League",
+            "fr": "Ligue"
+          }
+        },
+        {
+          "key": "team_score",
+          "type": "number",
+          "label": {
+            "en": "Team score",
+            "fr": "Score de l'équipe"
+          }
+        },
+        {
+          "key": "opponent_score",
+          "type": "number",
+          "label": {
+            "en": "Opponent score",
+            "fr": "Score adverse"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé"
+          }
+        },
+        {
+          "key": "points",
+          "type": "number",
+          "label": {
+            "en": "Points scored",
+            "fr": "Points marqués"
+          }
+        }
+      ]
+    },
+    {
+      "key": "opponent_scored",
+      "label": {
+        "en": "Opponent scored",
+        "fr": "L'adversaire a marqué"
+      },
+      "description": {
+        "en": "The opponent of a followed team scored.",
+        "fr": "L'adversaire d'une équipe suivie a marqué."
+      },
+      "fields": [
+        {
+          "key": "team",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Team",
+            "fr": "Équipe"
+          }
+        },
+        {
+          "key": "home_away",
+          "type": "select",
+          "label": {
+            "en": "Home or away",
+            "fr": "Domicile ou extérieur"
+          },
+          "options": [
+            {
+              "value": "home",
+              "label": {
+                "en": "Home",
+                "fr": "Domicile"
+              }
+            },
+            {
+              "value": "away",
+              "label": {
+                "en": "Away",
+                "fr": "Extérieur"
+              }
+            }
+          ]
+        }
+      ],
+      "variables": [
+        {
+          "key": "team_name",
+          "type": "string",
+          "label": {
+            "en": "Team",
+            "fr": "Équipe"
+          }
+        },
+        {
+          "key": "opponent",
+          "type": "string",
+          "label": {
+            "en": "Opponent",
+            "fr": "Adversaire"
+          }
+        },
+        {
+          "key": "home_away",
+          "type": "string",
+          "label": {
+            "en": "Home or away (home, away)",
+            "fr": "Domicile ou extérieur (home, away)"
+          }
+        },
+        {
+          "key": "league",
+          "type": "string",
+          "label": {
+            "en": "League",
+            "fr": "Ligue"
+          }
+        },
+        {
+          "key": "team_score",
+          "type": "number",
+          "label": {
+            "en": "Team score",
+            "fr": "Score de l'équipe"
+          }
+        },
+        {
+          "key": "opponent_score",
+          "type": "number",
+          "label": {
+            "en": "Opponent score",
+            "fr": "Score adverse"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé"
+          }
+        },
+        {
+          "key": "points",
+          "type": "number",
+          "label": {
+            "en": "Points scored",
+            "fr": "Points marqués"
+          }
+        }
+      ]
+    },
+    {
+      "key": "match_ended",
+      "label": {
+        "en": "Match ended",
+        "fr": "Match terminé"
+      },
+      "description": {
+        "en": "A match of a followed team is over, with its result.",
+        "fr": "Un match d'une équipe suivie est terminé, avec son résultat."
+      },
+      "fields": [
+        {
+          "key": "team",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Team",
+            "fr": "Équipe"
+          }
+        },
+        {
+          "key": "home_away",
+          "type": "select",
+          "label": {
+            "en": "Home or away",
+            "fr": "Domicile ou extérieur"
+          },
+          "options": [
+            {
+              "value": "home",
+              "label": {
+                "en": "Home",
+                "fr": "Domicile"
+              }
+            },
+            {
+              "value": "away",
+              "label": {
+                "en": "Away",
+                "fr": "Extérieur"
+              }
+            }
+          ]
+        },
+        {
+          "key": "result",
+          "type": "multi_select",
+          "label": {
+            "en": "Result",
+            "fr": "Résultat"
+          },
+          "options": [
+            {
+              "value": "win",
+              "label": {
+                "en": "Win",
+                "fr": "Victoire"
+              }
+            },
+            {
+              "value": "loss",
+              "label": {
+                "en": "Loss",
+                "fr": "Défaite"
+              }
+            },
+            {
+              "value": "draw",
+              "label": {
+                "en": "Draw",
+                "fr": "Match nul"
+              }
+            }
+          ]
+        }
+      ],
+      "variables": [
+        {
+          "key": "team_name",
+          "type": "string",
+          "label": {
+            "en": "Team",
+            "fr": "Équipe"
+          }
+        },
+        {
+          "key": "opponent",
+          "type": "string",
+          "label": {
+            "en": "Opponent",
+            "fr": "Adversaire"
+          }
+        },
+        {
+          "key": "home_away",
+          "type": "string",
+          "label": {
+            "en": "Home or away (home, away)",
+            "fr": "Domicile ou extérieur (home, away)"
+          }
+        },
+        {
+          "key": "league",
+          "type": "string",
+          "label": {
+            "en": "League",
+            "fr": "Ligue"
+          }
+        },
+        {
+          "key": "team_score",
+          "type": "number",
+          "label": {
+            "en": "Team score",
+            "fr": "Score de l'équipe"
+          }
+        },
+        {
+          "key": "opponent_score",
+          "type": "number",
+          "label": {
+            "en": "Opponent score",
+            "fr": "Score adverse"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé"
+          }
+        },
+        {
+          "key": "result",
+          "type": "string",
+          "label": {
+            "en": "Result (win, loss, draw)",
+            "fr": "Résultat (win, loss, draw)"
+          }
+        }
+      ]
+    }
+  ],
+  "scene_actions": [
+    {
+      "key": "get_match",
+      "label": {
+        "en": "Get the match of a team",
+        "fr": "Lire le match d'une équipe"
+      },
+      "description": {
+        "en": "Current or next match of a followed team, for the following actions.",
+        "fr": "Match en cours ou à venir d'une équipe suivie, pour les actions suivantes."
+      },
+      "timeout_seconds": 10,
+      "fields": [
+        {
+          "key": "team",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Team",
+            "fr": "Équipe"
+          },
+          "required": true
+        }
+      ],
+      "outputs": [
+        {
+          "key": "state",
+          "type": "string",
+          "label": {
+            "en": "State (pre, in, post, none)",
+            "fr": "État (pre, in, post, none)"
+          }
+        },
+        {
+          "key": "is_live",
+          "type": "boolean",
+          "label": {
+            "en": "Match live",
+            "fr": "Match en direct"
+          }
+        },
+        {
+          "key": "team_score",
+          "type": "number",
+          "label": {
+            "en": "Team score",
+            "fr": "Score de l'équipe"
+          }
+        },
+        {
+          "key": "opponent_score",
+          "type": "number",
+          "label": {
+            "en": "Opponent score",
+            "fr": "Score adverse"
+          }
+        },
+        {
+          "key": "opponent",
+          "type": "string",
+          "label": {
+            "en": "Opponent",
+            "fr": "Adversaire"
+          }
+        },
+        {
+          "key": "kickoff",
+          "type": "string",
+          "label": {
+            "en": "Kickoff (ISO date)",
+            "fr": "Coup d'envoi (date ISO)"
+          }
+        },
+        {
+          "key": "result",
+          "type": "string",
+          "label": {
+            "en": "Result (win, loss, draw)",
+            "fr": "Résultat (win, loss, draw)"
+          }
+        },
+        {
+          "key": "summary",
+          "type": "string",
+          "label": {
+            "en": "Summary",
+            "fr": "Résumé"
+          }
+        }
+      ]
+    }
+  ],
+  "widgets": [
+    {
+      "key": "team_match",
+      "label": {
+        "en": "Team match",
+        "fr": "Match d'une équipe"
+      },
+      "description": {
+        "en": "Live score, clock and kickoff of one followed team.",
+        "fr": "Score en direct, chrono et coup d'envoi d'une équipe suivie."
+      },
+      "icon": "award",
+      "settings": [
+        {
+          "key": "team",
+          "type": "select",
+          "source": "devices",
+          "label": {
+            "en": "Team",
+            "fr": "Équipe"
+          },
+          "required": true
+        }
+      ],
+      "action_timeout_seconds": 30
+    },
+    {
+      "key": "my_teams",
+      "label": {
+        "en": "My teams",
+        "fr": "Mes équipes"
+      },
+      "description": {
+        "en": "Every followed team: live score, last result or next match.",
+        "fr": "Toutes les équipes suivies : score en direct, dernier résultat ou prochain match."
+      },
+      "icon": "list",
+      "action_timeout_seconds": 30
+    }
+  ]
+}

@@ -1,0 +1,189 @@
+{
+  "sports": [
+    {
+      "leagues": [
+        {
+          "teams": [
+            {
+              "team": {
+                "id": "25912",
+                "abbreviation": "BAY",
+                "displayName": "Bayonne",
+                "shortDisplayName": "Bayonne"
+              }
+            },
+            {
+              "team": {
+                "id": "143737",
+                "abbreviation": "UNI",
+                "displayName": "Bordeaux Begles",
+                "shortDisplayName": "Bordeaux Begles",
+                "logos": [
+                  {
+                    "href": "https://a.espncdn.com/i/teamlogos/rugby/teams/500/143737.png"
+                  }
+                ]
+              }
+            },
+            {
+              "team": {
+                "id": "25916",
+                "abbreviation": "CAS",
+                "displayName": "Castres Olympique",
+                "shortDisplayName": "Castres Olympique",
+                "logos": [
+                  {
+                    "href": "https://a.espncdn.com/i/teamlogos/rugby/teams/500/25916.png"
+                  }
+                ]
+              }
+            },
+            {
+              "team": {
+                "id": "25917",
+                "abbreviation": "ASM",
+                "displayName": "Clermont Auvergne",
+                "shortDisplayName": "Clermont Auvergne",
+                "logos": [
+                  {
+                    "href": "https://a.espncdn.com/i/teamlogos/rugby/teams/500/25917.png"
+                  }
+                ]
+              }
+            },
+            {
+              "team": {
+                "id": "119318",
+                "abbreviation": "STA",
+                "displayName": "La Rochelle",
+                "shortDisplayName": "La Rochelle",
+                "logos": [
+                  {
+                    "href": "https://a.espncdn.com/i/teamlogos/rugby/teams/500/119318.png"
+                  }
+                ]
+              }
+            },
+            {
+              "team": {
+                "id": "143736",
+                "abbreviation": "LYO",
+                "displayName": "Lyon",
+                "shortDisplayName": "Lyon",
+                "logos": [
+                  {
+                    "href": "https://a.espncdn.com/i/teamlogos/rugby/teams/500/143736.png"
+                  }
+                ]
+              }
+            },
+            {
+              "team": {
+                "id": "25918",
+                "abbreviation": "MON",
+                "displayName": "Montpellier Herault",
+                "shortDisplayName": "Montpellier Herault",
+                "logos": [
+                  {
+                    "href": "https://a.espncdn.com/i/teamlogos/rugby/teams/500/25918.png"
+                  }
+                ]
+              }
+            },
+            {
+              "team": {
+                "id": "190153",
+                "abbreviation": "OYO",
+                "displayName": "Oyonnax",
+                "shortDisplayName": "Oyonnax",
+                "logos": [
+                  {
+                    "href": "https://a.espncdn.com/i/teamlogos/rugby/teams/500/190153.png"
+                  }
+                ]
+              }
+            },
+            {
+              "team": {
+                "id": "270567",
+                "abbreviation": "SEC",
+                "displayName": "Pau",
+                "shortDisplayName": "Pau",
+                "logos": [
+                  {
+                    "href": "https://a.espncdn.com/i/teamlogos/rugby/teams/500/270567.png"
+                  }
+                ]
+              }
+            },
+            {
+              "team": {
+                "id": "25920",
+                "abbreviation": "USA",
+                "displayName": "Perpignan",
+                "shortDisplayName": "Perpignan",
+                "logos": [
+                  {
+                    "href": "https://a.espncdn.com/i/teamlogos/countries/500/usa.png"
+                  }
+                ]
+              }
+            },
+            {
+              "team": {
+                "id": "99855",
+                "abbreviation": "RAC",
+                "displayName": "Racing 92",
+                "shortDisplayName": "Racing 92",
+                "logos": [
+                  {
+                    "href": "https://a.espncdn.com/i/teamlogos/rugby/teams/500/99855.png"
+                  }
+                ]
+              }
+            },
+            {
+              "team": {
+                "id": "25921",
+                "abbreviation": "STA",
+                "displayName": "Stade Francais Paris",
+                "shortDisplayName": "Stade Francais Paris",
+                "logos": [
+                  {
+                    "href": "https://a.espncdn.com/i/teamlogos/rugby/teams/500/25921.png"
+                  }
+                ]
+              }
+            },
+            {
+              "team": {
+                "id": "25922",
+                "abbreviation": "STA",
+                "displayName": "Stade Toulousain",
+                "shortDisplayName": "Stade Toulousain",
+                "logos": [
+                  {
+                    "href": "https://a.espncdn.com/i/teamlogos/rugby/teams/500/25922.png"
+                  }
+                ]
+              }
+            },
+            {
+              "team": {
+                "id": "25986",
+                "abbreviation": "RC",
+                "displayName": "Toulon",
+                "shortDisplayName": "Toulon",
+                "logos": [
+                  {
+                    "href": "https://a.espncdn.com/i/teamlogos/rugby/teams/500/25986.png"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

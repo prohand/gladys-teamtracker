@@ -1,0 +1,77 @@
+{
+  "team": {
+    "id": "160",
+    "abbreviation": "PSG",
+    "displayName": "Paris Saint-Germain",
+    "shortDisplayName": "PSG",
+    "logos": [
+      {
+        "href": "https://a.espncdn.com/i/teamlogos/soccer/500/160.png"
+      }
+    ],
+    "nextEvent": [
+      {
+        "id": "401876432",
+        "date": "2026-10-17T15:15Z",
+        "name": "Paris Saint-Germain at Strasbourg",
+        "shortName": "PSG @ STR",
+        "competitions": [
+          {
+            "id": "401876432",
+            "date": "2026-10-17T15:15Z",
+            "status": {
+              "clock": 0,
+              "displayClock": "0'",
+              "period": 0,
+              "type": {
+                "name": "STATUS_SCHEDULED",
+                "state": "pre",
+                "completed": false,
+                "description": "Scheduled",
+                "detail": "Sat, October 17th at 11:15 AM EDT",
+                "shortDetail": "10/17 - 11:15 AM EDT"
+              }
+            },
+            "venue": {
+              "fullName": "Stade de la Meinau"
+            },
+            "competitors": [
+              {
+                "id": "180",
+                "homeAway": "home",
+                "winner": false,
+                "team": {
+                  "id": "180",
+                  "abbreviation": "STR",
+                  "displayName": "Strasbourg",
+                  "shortDisplayName": "Strasbourg",
+                  "logos": [
+                    {
+                      "href": "https://a.espncdn.com/i/teamlogos/soccer/500/180.png"
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "160",
+                "homeAway": "away",
+                "winner": false,
+                "team": {
+                  "id": "160",
+                  "abbreviation": "PSG",
+                  "displayName": "Paris Saint-Germain",
+                  "shortDisplayName": "PSG",
+                  "logos": [
+                    {
+                      "href": "https://a.espncdn.com/i/teamlogos/soccer/500/160.png"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
