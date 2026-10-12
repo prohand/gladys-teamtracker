@@ -72,8 +72,6 @@ export class Tracker {
     this.tracked = new Map();
     /** @type {Map<string, { teams: object[], fetchedAt: number }>} */
     this.teamLists = new Map();
-    /** @type {Map<string, { value: unknown, at: number }>} */
-    this.published = new Map();
     /** @type {Map<string, string>} */
     this.transports = new Map();
     this.devicesSignature = null;
@@ -175,7 +173,7 @@ export class Tracker {
    * states, and a device created meanwhile has none yet.
    */
   resetPublished() {
-    this.published.clear();
+    this.gladys.forgetPublishedStates();
     this.transports.clear();
     this.devicesSignature = null;
   }
@@ -397,31 +395,18 @@ export class Tracker {
   }
 
   async publishAllStates() {
-    const now = this.now();
     // States of a device the user has not created yet are refused: only send
     // those of created devices (the list the SDK keeps up to date).
     const created = new Set((this.gladys.devices ?? []).map((device) => device.external_id));
     const states = this.list()
       .filter((t) => t.info && t.match !== undefined && created.has(this.deviceId(t)))
-      .flatMap((t) => teamStates(this.gladys, t, this.config))
-      .filter((state) => {
-        const value = state.text ?? state.state;
-        const last = this.published.get(state.device_feature_external_id);
-        return !last || last.value !== value || now - last.at > REPUBLISH_AFTER;
-      });
-    for (let i = 0; i < states.length; i += MAX_STATES_PER_REQUEST) {
-      const batch = states.slice(i, i + MAX_STATES_PER_REQUEST);
-      try {
-        await this.gladys.publishStates(batch);
-        for (const state of batch) {
-          this.published.set(state.device_feature_external_id, {
-            value: state.text ?? state.state,
-            at: now,
-          });
-        }
-      } catch (err) {
-        logger.error('Gladys refused the states', err);
-      }
+      .flatMap((t) => teamStates(this.gladys, t, this.config));
+    // The SDK only sends what changed (plus the heartbeat) and splits the
+    // batch by 100.
+    try {
+      await this.gladys.publishChangedStates(states, { heartbeat: REPUBLISH_AFTER });
+    } catch (err) {
+      logger.error('Gladys refused the states', err);
     }
   }
 

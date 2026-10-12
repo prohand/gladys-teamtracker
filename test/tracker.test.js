@@ -104,6 +104,29 @@ test('created devices get their scores and status line', async () => {
   assert.equal(gladys.published.length, count);
 });
 
+test('unchanged states are sent again after 6 hours, and all of them after a reconnection', async (t) => {
+  t.mock.timers.enable({ apis: ['Date'], now: Date.parse('2026-10-11T20:00Z') });
+  const { gladys, tracker } = setup();
+  await tracker.refresh();
+  gladys.createAll();
+  await tracker.refresh();
+  const first = gladys.published.length;
+  assert.ok(first > 0);
+
+  t.mock.timers.tick(5 * 60 * 60 * 1000);
+  await tracker.refresh();
+  assert.equal(gladys.published.length, first, 'still fresh: nothing sent');
+
+  // Gladys flags a value older than 48 h: the heartbeat re-sends it.
+  t.mock.timers.tick(60 * 60 * 1000);
+  await tracker.refresh();
+  assert.equal(gladys.published.length, 2 * first);
+
+  tracker.resetPublished();
+  await tracker.refresh();
+  assert.equal(gladys.published.length, 3 * first);
+});
+
 test('a whole match fires each scene event once, in order', async () => {
   const { gladys, espn, clock, tracker } = setup({ teams: 'LIG1:PSG' });
   const step = async (iso, state, psg, str) => {
