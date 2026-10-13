@@ -10,13 +10,15 @@ test('normalizeConfig fills the defaults and forces the types', () => {
     live_refresh: '45',
     idle_refresh: 1,
     reminder_minutes: 'abc',
-    language: 'de',
+    language: 'it',
     timezone: 'Not/AZone',
   });
   assert.equal(config.live_refresh, 45);
   assert.equal(config.idle_refresh, 5, 'clamped to the manifest minimum');
   assert.equal(config.reminder_minutes, DEFAULT_CONFIG.reminder_minutes);
-  assert.equal(config.language, 'en');
+  assert.equal(config.language, 'en', 'a language the integration does not write falls back');
+  assert.equal(normalizeConfig({ language: 'de' }).language, 'de');
+  assert.equal(normalizeConfig({ language: 'es' }).language, 'es');
   assert.equal(config.timezone, DEFAULT_CONFIG.timezone);
   assert.equal(normalizeConfig({ timezone: 'America/New_York' }).timezone, 'America/New_York');
 });

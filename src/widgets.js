@@ -13,7 +13,7 @@
 // -----------------------------------------------------------------------------
 
 import { createLogger, WIDGET_COLORS } from '@gladysassistant/integration-sdk';
-import { bilingual, formatClock, formatKickoff, formatResult, formatStatus } from './format.js';
+import { multilingual, formatClock, formatKickoff, formatResult, formatStatus } from './format.js';
 import { FEATURE, teamExternalIds } from './devices/team.js';
 
 const logger = createLogger({ name: 'widgets' });
@@ -27,6 +27,14 @@ const LIVE_TTL = 30;
 const IDLE_TTL = 600;
 // A `list` card-list shows 8 rows at most.
 const MAX_LIST_ITEMS = 8;
+
+// "(home)" / "(away)" after the opponent's name.
+const HOME_AWAY = {
+  en: { home: 'home', away: 'away' },
+  fr: { home: 'domicile', away: 'extérieur' },
+  de: { home: 'Heim', away: 'auswärts' },
+  es: { home: 'local', away: 'visitante' },
+};
 
 // Image keys: `^[a-z0-9][a-z0-9-]{0,63}$`. The ESPN team id is the variable
 // part; the sport and league keep two leagues' ids apart.
@@ -43,8 +51,9 @@ function clip(text, max) {
 }
 
 function both(build, max) {
-  const texts = bilingual(build);
-  return { en: clip(texts.en, max), fr: clip(texts.fr, max) };
+  return Object.fromEntries(
+    Object.entries(multilingual(build)).map(([language, text]) => [language, clip(text, max)]),
+  );
 }
 
 function badge(match) {
@@ -52,7 +61,10 @@ function badge(match) {
     return undefined;
   }
   if (match.state === 'in') {
-    return { text: { en: 'LIVE', fr: 'DIRECT' }, color: WIDGET_COLORS.DANGER };
+    return {
+      text: { en: 'LIVE', fr: 'DIRECT', de: 'LIVE', es: 'EN DIRECTO' },
+      color: WIDGET_COLORS.DANGER,
+    };
   }
   if (match.state === 'post' && match.completed) {
     const color = {
@@ -60,10 +72,13 @@ function badge(match) {
       loss: WIDGET_COLORS.DANGER,
       draw: WIDGET_COLORS.NEUTRAL,
     }[match.result];
-    return { text: bilingual((language) => formatResult(match.result, language)), color };
+    return { text: multilingual((language) => formatResult(match.result, language)), color };
   }
   if (match.state === 'pre') {
-    return { text: { en: 'NEXT', fr: 'À VENIR' }, color: WIDGET_COLORS.INFO };
+    return {
+      text: { en: 'NEXT', fr: 'À VENIR', de: 'DEMNÄCHST', es: 'PRÓXIMO' },
+      color: WIDGET_COLORS.INFO,
+    };
   }
   return undefined;
 }
@@ -71,7 +86,7 @@ function badge(match) {
 function stateRow(match) {
   if (match.state === 'in') {
     return {
-      label: { en: 'Live', fr: 'En direct' },
+      label: { en: 'Live', fr: 'En direct', de: 'Live', es: 'En directo' },
       icon: 'activity',
       value: both((language) => formatClock(match, language), 40),
       color: WIDGET_COLORS.DANGER,
@@ -79,7 +94,7 @@ function stateRow(match) {
   }
   if (match.state === 'post') {
     return {
-      label: { en: 'Result', fr: 'Résultat' },
+      label: { en: 'Result', fr: 'Résultat', de: 'Ergebnis', es: 'Resultado' },
       icon: 'flag',
       value: match.completed
         ? both((language) => formatResult(match.result, language), 40)
@@ -88,9 +103,9 @@ function stateRow(match) {
     };
   }
   return {
-    label: { en: 'Status', fr: 'Statut' },
+    label: { en: 'Status', fr: 'Statut', de: 'Status', es: 'Estado' },
     icon: 'clock',
-    value: { en: 'Scheduled', fr: 'Programmé' },
+    value: { en: 'Scheduled', fr: 'Programmé', de: 'Geplant', es: 'Programado' },
     color: WIDGET_COLORS.INFO,
   };
 }
@@ -98,7 +113,7 @@ function stateRow(match) {
 function refreshButton() {
   return {
     type: 'button',
-    label: { en: 'Refresh', fr: 'Actualiser' },
+    label: { en: 'Refresh', fr: 'Actualiser', de: 'Aktualisieren', es: 'Actualizar' },
     icon: 'refresh-cw',
     style: 'secondary',
     action: { key: REFRESH_ACTION },
@@ -117,9 +132,14 @@ function teamMatchContent(gladys, tracked, config) {
           type: 'status',
           items: [
             {
-              label: { en: 'Status', fr: 'Statut' },
+              label: { en: 'Status', fr: 'Statut', de: 'Status', es: 'Estado' },
               icon: 'calendar',
-              value: { en: 'No match scheduled', fr: 'Aucun match prévu' },
+              value: {
+                en: 'No match scheduled',
+                fr: 'Aucun match prévu',
+                de: 'Kein Spiel geplant',
+                es: 'Ningún partido previsto',
+              },
               color: WIDGET_COLORS.NEUTRAL,
             },
           ],
@@ -165,25 +185,17 @@ function teamMatchContent(gladys, tracked, config) {
         items: [
           stateRow(match),
           {
-            label: { en: 'Kickoff', fr: "Coup d'envoi" },
+            label: { en: 'Kickoff', fr: "Coup d'envoi", de: 'Anstoß', es: 'Inicio' },
             icon: 'calendar',
             value: both((language) => formatKickoff(match.kickoff, language, config.timezone), 40),
             color: WIDGET_COLORS.NEUTRAL,
           },
           {
-            label: { en: 'Opponent', fr: 'Adversaire' },
+            label: { en: 'Opponent', fr: 'Adversaire', de: 'Gegner', es: 'Rival' },
             icon: match.homeAway === 'home' ? 'home' : 'navigation',
             value: both(
               (language) =>
-                `${match.opponent.name} (${
-                  match.homeAway === 'home'
-                    ? language === 'fr'
-                      ? 'domicile'
-                      : 'home'
-                    : language === 'fr'
-                      ? 'extérieur'
-                      : 'away'
-                })`,
+                `${match.opponent.name} (${HOME_AWAY[language][match.homeAway === 'home' ? 'home' : 'away']})`,
               40,
             ),
             color: WIDGET_COLORS.NEUTRAL,
@@ -207,6 +219,8 @@ function myTeamsContent(tracker, config) {
           text: {
             en: 'No team followed yet: add some in the integration configuration.',
             fr: "Aucune équipe suivie : ajoutez-en dans la configuration de l'intégration.",
+            de: 'Noch kein Team verfolgt: Füge welche in der Konfiguration der Integration hinzu.',
+            es: 'Aún no sigue ningún equipo: añada alguno en la configuración de la integración.',
           },
         },
       ],
@@ -262,7 +276,12 @@ export function createWidgets(tracker) {
       throw new Error(`Unknown widget action: ${actionKey}`);
     }
     await tracker.refresh();
-    return { en: 'Scores refreshed', fr: 'Scores actualisés' };
+    return {
+      en: 'Scores refreshed',
+      fr: 'Scores actualisés',
+      de: 'Ergebnisse aktualisiert',
+      es: 'Resultados actualizados',
+    };
   }
 
   return {
@@ -280,6 +299,8 @@ export function createWidgets(tracker) {
                 text: {
                   en: 'Pick a followed team in the settings of this widget.',
                   fr: 'Choisissez une équipe suivie dans les réglages de ce widget.',
+                  de: 'Wähle in den Einstellungen dieses Widgets ein verfolgtes Team.',
+                  es: 'Elija un equipo seguido en los ajustes de este widget.',
                 },
               },
             ],

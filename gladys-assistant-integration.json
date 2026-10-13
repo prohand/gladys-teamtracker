@@ -4,7 +4,9 @@
   "name": "Team Tracker",
   "description": {
     "en": "Follow your sports teams: live scores, next match, and scenes when your team scores.",
-    "fr": "Suivez vos équipes : scores en direct, prochain match et scènes quand votre équipe marque."
+    "fr": "Suivez vos équipes : scores en direct, prochain match et scènes quand votre équipe marque.",
+    "de": "Verfolge deine Teams: Live-Ergebnisse, nächstes Spiel und Szenen, wenn dein Team punktet.",
+    "es": "Siga a sus equipos: resultados en directo, próximo partido y escenas cuando su equipo marca."
   },
   "version": "1.0.2",
   "docker_image": "ghcr.io/prohand/gladys-teamtracker:1.0.2",
@@ -18,18 +20,24 @@
       "type": "section",
       "label": {
         "en": "Getting started",
-        "fr": "Pour commencer"
+        "fr": "Pour commencer",
+        "de": "Erste Schritte",
+        "es": "Primeros pasos"
       },
       "description": {
-        "en": "Scores come from the public ESPN API: no account, no key. Write the teams to follow as LEAGUE:TEAM, separated by commas, e.g. LIG1:PSG, TOP14:RAC, NFL:KC. Not sure of the abbreviation? Use the \"Find a team\" button below. Each team becomes a device in the Discovery tab.",
-        "fr": "Les scores viennent de l'API publique d'ESPN : pas de compte, pas de clé. Écrivez les équipes à suivre sous la forme LIGUE:ÉQUIPE, séparées par des virgules, par ex. LIG1:PSG, TOP14:RAC, NFL:KC. Pas sûr de l'abréviation ? Utilisez le bouton « Trouver une équipe » plus bas. Chaque équipe devient un appareil dans l'onglet Découverte."
+        "en": "Scores come from the public ESPN API: no account, no key. Write the teams to follow as LEAGUE:TEAM, separated by commas, e.g. LIG1:PSG, TOP14:RAC, NFL:KC. Not sure of the abbreviation? Use the \"Find a team\" button below. Each team becomes a device in the Discover tab.",
+        "fr": "Les scores viennent de l'API publique d'ESPN : pas de compte, pas de clé. Écrivez les équipes à suivre sous la forme LIGUE:ÉQUIPE, séparées par des virgules, par ex. LIG1:PSG, TOP14:RAC, NFL:KC. Pas sûr de l'abréviation ? Utilisez le bouton « Trouver une équipe » plus bas. Chaque équipe devient un appareil dans l'onglet Découverte.",
+        "de": "Die Ergebnisse stammen aus der öffentlichen ESPN-API: kein Konto, kein Schlüssel. Schreib die zu verfolgenden Teams als LIGA:TEAM, durch Kommas getrennt, z. B. LIG1:PSG, TOP14:RAC, NFL:KC. Unsicher bei der Abkürzung? Nutze unten die Schaltfläche „Team suchen“. Jedes Team wird zu einem Gerät im Tab „Entdecken“.",
+        "es": "Los resultados proceden de la API pública de ESPN: sin cuenta ni clave. Escriba los equipos que desea seguir como LIGA:EQUIPO, separados por comas, p. ej. LIG1:PSG, TOP14:RAC, NFL:KC. ¿No está seguro de la abreviatura? Use el botón «Buscar un equipo» más abajo. Cada equipo se convierte en un dispositivo en la pestaña «Descubrir»."
       },
       "links": [
         {
           "url": "https://github.com/prohand/gladys-teamtracker/blob/main/docs/en.md#leagues",
           "label": {
             "en": "League codes",
-            "fr": "Codes des ligues"
+            "fr": "Codes des ligues",
+            "de": "Liga-Codes",
+            "es": "Códigos de las ligas"
           }
         }
       ]
@@ -39,15 +47,21 @@
       "type": "string",
       "label": {
         "en": "Teams",
-        "fr": "Équipes"
+        "fr": "Équipes",
+        "de": "Teams",
+        "es": "Equipos"
       },
       "description": {
         "en": "LEAGUE:TEAM entries separated by commas (20 at most). The team is its abbreviation or its ESPN id.",
-        "fr": "Entrées LIGUE:ÉQUIPE séparées par des virgules (20 au plus). L'équipe est son abréviation ou son identifiant ESPN."
+        "fr": "Entrées LIGUE:ÉQUIPE séparées par des virgules (20 au plus). L'équipe est son abréviation ou son identifiant ESPN.",
+        "de": "Einträge LIGA:TEAM, durch Kommas getrennt (höchstens 20). Das Team ist seine Abkürzung oder seine ESPN-ID.",
+        "es": "Entradas LIGA:EQUIPO separadas por comas (20 como máximo). El equipo es su abreviatura o su identificador ESPN."
       },
       "placeholder": {
         "en": "e.g. LIG1:PSG, NFL:KC",
-        "fr": "ex. LIG1:PSG, NFL:KC"
+        "fr": "ex. LIG1:PSG, NFL:KC",
+        "de": "z. B. LIG1:PSG, NFL:KC",
+        "es": "p. ej. LIG1:PSG, NFL:KC"
       },
       "required": true
     },
@@ -56,11 +70,15 @@
       "type": "select",
       "label": {
         "en": "Language of the match texts",
-        "fr": "Langue des textes de match"
+        "fr": "Langue des textes de match",
+        "de": "Sprache der Spieltexte",
+        "es": "Idioma de los textos del partido"
       },
       "description": {
         "en": "Language of the \"Match\" text shown on the devices and sent to the scenes.",
-        "fr": "Langue du texte « Match » affiché sur les appareils et envoyé aux scènes."
+        "fr": "Langue du texte « Match » affiché sur les appareils et envoyé aux scènes.",
+        "de": "Sprache des Texts „Spiel“, der auf den Geräten angezeigt und an die Szenen gesendet wird.",
+        "es": "Idioma del texto «Partido» mostrado en los dispositivos y enviado a las escenas."
       },
       "required": false,
       "default": "en",
@@ -70,14 +88,36 @@
           "value": "en",
           "label": {
             "en": "English",
-            "fr": "Anglais"
+            "fr": "Anglais",
+            "de": "Englisch",
+            "es": "Inglés"
           }
         },
         {
           "value": "fr",
           "label": {
             "en": "French",
-            "fr": "Français"
+            "fr": "Français",
+            "de": "Französisch",
+            "es": "Francés"
+          }
+        },
+        {
+          "value": "de",
+          "label": {
+            "en": "German",
+            "fr": "Allemand",
+            "de": "Deutsch",
+            "es": "Alemán"
+          }
+        },
+        {
+          "value": "es",
+          "label": {
+            "en": "Spanish",
+            "fr": "Espagnol",
+            "de": "Spanisch",
+            "es": "Español"
           }
         }
       ]
@@ -87,15 +127,21 @@
       "type": "string",
       "label": {
         "en": "Time zone",
-        "fr": "Fuseau horaire"
+        "fr": "Fuseau horaire",
+        "de": "Zeitzone",
+        "es": "Zona horaria"
       },
       "description": {
         "en": "Kickoff times are written in this time zone (IANA name).",
-        "fr": "Les heures de coup d'envoi sont écrites dans ce fuseau (nom IANA)."
+        "fr": "Les heures de coup d'envoi sont écrites dans ce fuseau (nom IANA).",
+        "de": "Anstoßzeiten werden in dieser Zeitzone angegeben (IANA-Name).",
+        "es": "Las horas de inicio se escriben en esta zona horaria (nombre IANA)."
       },
       "placeholder": {
         "en": "e.g. America/New_York",
-        "fr": "ex. Europe/Paris"
+        "fr": "ex. Europe/Paris",
+        "de": "z. B. Europe/Berlin",
+        "es": "p. ej. Europe/Madrid"
       },
       "required": false,
       "default": "Europe/Paris"
@@ -105,11 +151,15 @@
       "type": "number",
       "label": {
         "en": "Kickoff reminder (min)",
-        "fr": "Rappel avant le coup d'envoi (min)"
+        "fr": "Rappel avant le coup d'envoi (min)",
+        "de": "Erinnerung vor Anstoß (min)",
+        "es": "Aviso antes del inicio (min)"
       },
       "description": {
         "en": "The \"Match starting soon\" trigger fires this many minutes before kickoff. 0 turns it off.",
-        "fr": "Le déclencheur « Match bientôt » part ce nombre de minutes avant le coup d'envoi. 0 le désactive."
+        "fr": "Le déclencheur « Match bientôt » part ce nombre de minutes avant le coup d'envoi. 0 le désactive.",
+        "de": "Der Auslöser „Spiel beginnt bald“ wird so viele Minuten vor dem Anstoß ausgelöst. 0 schaltet ihn aus.",
+        "es": "El desencadenante «El partido empieza pronto» se activa estos minutos antes del inicio. 0 lo desactiva."
       },
       "required": false,
       "default": 30,
@@ -121,11 +171,15 @@
       "type": "number",
       "label": {
         "en": "Refresh during a match (s)",
-        "fr": "Actualisation pendant un match (s)"
+        "fr": "Actualisation pendant un match (s)",
+        "de": "Aktualisierung während eines Spiels (s)",
+        "es": "Actualización durante un partido (s)"
       },
       "description": {
         "en": "How often scores are read while a match is live, in seconds.",
-        "fr": "Fréquence de lecture des scores pendant un match, en secondes."
+        "fr": "Fréquence de lecture des scores pendant un match, en secondes.",
+        "de": "Wie oft die Ergebnisse während eines laufenden Spiels gelesen werden, in Sekunden.",
+        "es": "Frecuencia de lectura de los resultados durante un partido en directo, en segundos."
       },
       "required": false,
       "default": 30,
@@ -137,11 +191,15 @@
       "type": "number",
       "label": {
         "en": "Refresh between matches (min)",
-        "fr": "Actualisation entre les matchs (min)"
+        "fr": "Actualisation entre les matchs (min)",
+        "de": "Aktualisierung zwischen Spielen (min)",
+        "es": "Actualización entre partidos (min)"
       },
       "description": {
         "en": "How often the next matches are checked when nothing is live, in minutes.",
-        "fr": "Fréquence de vérification des prochains matchs quand rien n'est en direct, en minutes."
+        "fr": "Fréquence de vérification des prochains matchs quand rien n'est en direct, en minutes.",
+        "de": "Wie oft die nächsten Spiele geprüft werden, wenn kein Spiel läuft, in Minuten.",
+        "es": "Frecuencia de comprobación de los próximos partidos cuando no hay nada en directo, en minutos."
       },
       "required": false,
       "default": 15,
@@ -154,11 +212,15 @@
       "key": "test_teams",
       "label": {
         "en": "Test the teams",
-        "fr": "Tester les équipes"
+        "fr": "Tester les équipes",
+        "de": "Teams testen",
+        "es": "Probar los equipos"
       },
       "description": {
         "en": "Read ESPN now and show, team by team, what is followed.",
-        "fr": "Lit ESPN maintenant et montre, équipe par équipe, ce qui est suivi."
+        "fr": "Lit ESPN maintenant et montre, équipe par équipe, ce qui est suivi.",
+        "de": "Liest ESPN jetzt und zeigt Team für Team, was verfolgt wird.",
+        "es": "Lee ESPN ahora y muestra, equipo por equipo, lo que se sigue."
       },
       "timeout_seconds": 60
     },
@@ -166,11 +228,15 @@
       "key": "find_team",
       "label": {
         "en": "Find a team",
-        "fr": "Trouver une équipe"
+        "fr": "Trouver une équipe",
+        "de": "Team suchen",
+        "es": "Buscar un equipo"
       },
       "description": {
         "en": "List the teams of a league with the exact text to paste in the Teams field.",
-        "fr": "Liste les équipes d'une ligue avec le texte exact à coller dans le champ Équipes."
+        "fr": "Liste les équipes d'une ligue avec le texte exact à coller dans le champ Équipes.",
+        "de": "Listet die Teams einer Liga mit dem genauen Text auf, der in das Feld Teams einzufügen ist.",
+        "es": "Lista los equipos de una liga con el texto exacto que debe pegar en el campo Equipos."
       },
       "timeout_seconds": 30,
       "fields": [
@@ -179,7 +245,9 @@
           "type": "select",
           "label": {
             "en": "League",
-            "fr": "Ligue"
+            "fr": "Ligue",
+            "de": "Liga",
+            "es": "Liga"
           },
           "required": true,
           "options": [
@@ -187,182 +255,234 @@
               "value": "LIG1",
               "label": {
                 "en": "Ligue 1 (LIG1)",
-                "fr": "Ligue 1 (LIG1)"
+                "fr": "Ligue 1 (LIG1)",
+                "de": "Ligue 1 (LIG1)",
+                "es": "Ligue 1 (LIG1)"
               }
             },
             {
               "value": "LIG2",
               "label": {
                 "en": "Ligue 2 (LIG2)",
-                "fr": "Ligue 2 (LIG2)"
+                "fr": "Ligue 2 (LIG2)",
+                "de": "Ligue 2 (LIG2)",
+                "es": "Ligue 2 (LIG2)"
               }
             },
             {
               "value": "CDF",
               "label": {
                 "en": "Coupe de France (CDF)",
-                "fr": "Coupe de France (CDF)"
+                "fr": "Coupe de France (CDF)",
+                "de": "Coupe de France (CDF)",
+                "es": "Coupe de France (CDF)"
               }
             },
             {
               "value": "D1F",
               "label": {
                 "en": "Première Ligue (D1F)",
-                "fr": "Première Ligue (D1F)"
+                "fr": "Première Ligue (D1F)",
+                "de": "Première Ligue (D1F)",
+                "es": "Première Ligue (D1F)"
               }
             },
             {
               "value": "EPL",
               "label": {
                 "en": "Premier League (EPL)",
-                "fr": "Premier League (EPL)"
+                "fr": "Premier League (EPL)",
+                "de": "Premier League (EPL)",
+                "es": "Premier League (EPL)"
               }
             },
             {
               "value": "LIGA",
               "label": {
                 "en": "LaLiga (LIGA)",
-                "fr": "LaLiga (LIGA)"
+                "fr": "LaLiga (LIGA)",
+                "de": "LaLiga (LIGA)",
+                "es": "LaLiga (LIGA)"
               }
             },
             {
               "value": "SERA",
               "label": {
                 "en": "Serie A (SERA)",
-                "fr": "Serie A (SERA)"
+                "fr": "Serie A (SERA)",
+                "de": "Serie A (SERA)",
+                "es": "Serie A (SERA)"
               }
             },
             {
               "value": "BUND",
               "label": {
                 "en": "Bundesliga (BUND)",
-                "fr": "Bundesliga (BUND)"
+                "fr": "Bundesliga (BUND)",
+                "de": "Bundesliga (BUND)",
+                "es": "Bundesliga (BUND)"
               }
             },
             {
               "value": "CL",
               "label": {
                 "en": "Champions League (CL)",
-                "fr": "Champions League (CL)"
+                "fr": "Champions League (CL)",
+                "de": "Champions League (CL)",
+                "es": "Champions League (CL)"
               }
             },
             {
               "value": "EL",
               "label": {
                 "en": "Europa League (EL)",
-                "fr": "Europa League (EL)"
+                "fr": "Europa League (EL)",
+                "de": "Europa League (EL)",
+                "es": "Europa League (EL)"
               }
             },
             {
               "value": "ECL",
               "label": {
                 "en": "Conference League (ECL)",
-                "fr": "Conference League (ECL)"
+                "fr": "Conference League (ECL)",
+                "de": "Conference League (ECL)",
+                "es": "Conference League (ECL)"
               }
             },
             {
               "value": "MLS",
               "label": {
                 "en": "MLS (MLS)",
-                "fr": "MLS (MLS)"
+                "fr": "MLS (MLS)",
+                "de": "MLS (MLS)",
+                "es": "MLS (MLS)"
               }
             },
             {
               "value": "NWSL",
               "label": {
                 "en": "NWSL (NWSL)",
-                "fr": "NWSL (NWSL)"
+                "fr": "NWSL (NWSL)",
+                "de": "NWSL (NWSL)",
+                "es": "NWSL (NWSL)"
               }
             },
             {
               "value": "WC",
               "label": {
                 "en": "FIFA World Cup (WC)",
-                "fr": "FIFA World Cup (WC)"
+                "fr": "FIFA World Cup (WC)",
+                "de": "FIFA World Cup (WC)",
+                "es": "FIFA World Cup (WC)"
               }
             },
             {
               "value": "WWC",
               "label": {
                 "en": "FIFA Women's World Cup (WWC)",
-                "fr": "FIFA Women's World Cup (WWC)"
+                "fr": "FIFA Women's World Cup (WWC)",
+                "de": "FIFA Women's World Cup (WWC)",
+                "es": "FIFA Women's World Cup (WWC)"
               }
             },
             {
               "value": "TOP14",
               "label": {
                 "en": "Top 14 (TOP14)",
-                "fr": "Top 14 (TOP14)"
+                "fr": "Top 14 (TOP14)",
+                "de": "Top 14 (TOP14)",
+                "es": "Top 14 (TOP14)"
               }
             },
             {
               "value": "SIXN",
               "label": {
                 "en": "Six Nations (SIXN)",
-                "fr": "Six Nations (SIXN)"
+                "fr": "Six Nations (SIXN)",
+                "de": "Six Nations (SIXN)",
+                "es": "Six Nations (SIXN)"
               }
             },
             {
               "value": "RWC",
               "label": {
                 "en": "Rugby World Cup (RWC)",
-                "fr": "Rugby World Cup (RWC)"
+                "fr": "Rugby World Cup (RWC)",
+                "de": "Rugby World Cup (RWC)",
+                "es": "Rugby World Cup (RWC)"
               }
             },
             {
               "value": "NFL",
               "label": {
                 "en": "NFL (NFL)",
-                "fr": "NFL (NFL)"
+                "fr": "NFL (NFL)",
+                "de": "NFL (NFL)",
+                "es": "NFL (NFL)"
               }
             },
             {
               "value": "NCAAF",
               "label": {
                 "en": "NCAA Football (NCAAF)",
-                "fr": "NCAA Football (NCAAF)"
+                "fr": "NCAA Football (NCAAF)",
+                "de": "NCAA Football (NCAAF)",
+                "es": "NCAA Football (NCAAF)"
               }
             },
             {
               "value": "NBA",
               "label": {
                 "en": "NBA (NBA)",
-                "fr": "NBA (NBA)"
+                "fr": "NBA (NBA)",
+                "de": "NBA (NBA)",
+                "es": "NBA (NBA)"
               }
             },
             {
               "value": "WNBA",
               "label": {
                 "en": "WNBA (WNBA)",
-                "fr": "WNBA (WNBA)"
+                "fr": "WNBA (WNBA)",
+                "de": "WNBA (WNBA)",
+                "es": "WNBA (WNBA)"
               }
             },
             {
               "value": "NCAAM",
               "label": {
                 "en": "NCAA Men (NCAAM)",
-                "fr": "NCAA Men (NCAAM)"
+                "fr": "NCAA Men (NCAAM)",
+                "de": "NCAA Men (NCAAM)",
+                "es": "NCAA Men (NCAAM)"
               }
             },
             {
               "value": "NCAAW",
               "label": {
                 "en": "NCAA Women (NCAAW)",
-                "fr": "NCAA Women (NCAAW)"
+                "fr": "NCAA Women (NCAAW)",
+                "de": "NCAA Women (NCAAW)",
+                "es": "NCAA Women (NCAAW)"
               }
             },
             {
               "value": "NHL",
               "label": {
                 "en": "NHL (NHL)",
-                "fr": "NHL (NHL)"
+                "fr": "NHL (NHL)",
+                "de": "NHL (NHL)",
+                "es": "NHL (NHL)"
               }
             },
             {
               "value": "MLB",
               "label": {
                 "en": "MLB (MLB)",
-                "fr": "MLB (MLB)"
+                "fr": "MLB (MLB)",
+                "de": "MLB (MLB)",
+                "es": "MLB (MLB)"
               }
             }
           ]
@@ -372,11 +492,15 @@
           "type": "string",
           "label": {
             "en": "Search",
-            "fr": "Recherche"
+            "fr": "Recherche",
+            "de": "Suche",
+            "es": "Búsqueda"
           },
           "placeholder": {
             "en": "e.g. Paris",
-            "fr": "ex. Paris"
+            "fr": "ex. Paris",
+            "de": "z. B. München",
+            "es": "p. ej. Madrid"
           },
           "required": false
         }
@@ -388,11 +512,15 @@
       "key": "match_soon",
       "label": {
         "en": "Match starting soon",
-        "fr": "Match bientôt"
+        "fr": "Match bientôt",
+        "de": "Spiel beginnt bald",
+        "es": "El partido empieza pronto"
       },
       "description": {
         "en": "A followed team plays soon (kickoff reminder of the configuration).",
-        "fr": "Une équipe suivie joue bientôt (rappel avant le coup d'envoi de la configuration)."
+        "fr": "Une équipe suivie joue bientôt (rappel avant le coup d'envoi de la configuration).",
+        "de": "Ein verfolgtes Team spielt bald (Erinnerung vor Anstoß aus der Konfiguration).",
+        "es": "Un equipo seguido juega pronto (aviso antes del inicio de la configuración)."
       },
       "fields": [
         {
@@ -401,7 +529,9 @@
           "source": "devices",
           "label": {
             "en": "Team",
-            "fr": "Équipe"
+            "fr": "Équipe",
+            "de": "Team",
+            "es": "Equipo"
           }
         },
         {
@@ -409,21 +539,27 @@
           "type": "select",
           "label": {
             "en": "Home or away",
-            "fr": "Domicile ou extérieur"
+            "fr": "Domicile ou extérieur",
+            "de": "Heim oder auswärts",
+            "es": "Local o visitante"
           },
           "options": [
             {
               "value": "home",
               "label": {
                 "en": "Home",
-                "fr": "Domicile"
+                "fr": "Domicile",
+                "de": "Heim",
+                "es": "Local"
               }
             },
             {
               "value": "away",
               "label": {
                 "en": "Away",
-                "fr": "Extérieur"
+                "fr": "Extérieur",
+                "de": "Auswärts",
+                "es": "Visitante"
               }
             }
           ]
@@ -435,7 +571,9 @@
           "type": "string",
           "label": {
             "en": "Team",
-            "fr": "Équipe"
+            "fr": "Équipe",
+            "de": "Team",
+            "es": "Equipo"
           }
         },
         {
@@ -443,7 +581,9 @@
           "type": "string",
           "label": {
             "en": "Opponent",
-            "fr": "Adversaire"
+            "fr": "Adversaire",
+            "de": "Gegner",
+            "es": "Rival"
           }
         },
         {
@@ -451,7 +591,9 @@
           "type": "string",
           "label": {
             "en": "Home or away (home, away)",
-            "fr": "Domicile ou extérieur (home, away)"
+            "fr": "Domicile ou extérieur (home, away)",
+            "de": "Heim oder auswärts (home, away)",
+            "es": "Local o visitante (home, away)"
           }
         },
         {
@@ -459,7 +601,9 @@
           "type": "string",
           "label": {
             "en": "League",
-            "fr": "Ligue"
+            "fr": "Ligue",
+            "de": "Liga",
+            "es": "Liga"
           }
         },
         {
@@ -467,7 +611,9 @@
           "type": "number",
           "label": {
             "en": "Team score",
-            "fr": "Score de l'équipe"
+            "fr": "Score de l'équipe",
+            "de": "Punkte des Teams",
+            "es": "Puntos del equipo"
           }
         },
         {
@@ -475,7 +621,9 @@
           "type": "number",
           "label": {
             "en": "Opponent score",
-            "fr": "Score adverse"
+            "fr": "Score adverse",
+            "de": "Punkte des Gegners",
+            "es": "Puntos del rival"
           }
         },
         {
@@ -483,7 +631,9 @@
           "type": "string",
           "label": {
             "en": "Summary",
-            "fr": "Résumé"
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
           }
         },
         {
@@ -491,7 +641,9 @@
           "type": "string",
           "label": {
             "en": "Kickoff (ISO date)",
-            "fr": "Coup d'envoi (date ISO)"
+            "fr": "Coup d'envoi (date ISO)",
+            "de": "Anstoß (ISO-Datum)",
+            "es": "Inicio (fecha ISO)"
           }
         },
         {
@@ -499,7 +651,9 @@
           "type": "number",
           "label": {
             "en": "Minutes before kickoff",
-            "fr": "Minutes avant le coup d'envoi"
+            "fr": "Minutes avant le coup d'envoi",
+            "de": "Minuten vor Anstoß",
+            "es": "Minutos antes del inicio"
           }
         }
       ]
@@ -508,11 +662,15 @@
       "key": "match_started",
       "label": {
         "en": "Match started",
-        "fr": "Match commencé"
+        "fr": "Match commencé",
+        "de": "Spiel begonnen",
+        "es": "Partido iniciado"
       },
       "description": {
         "en": "A match of a followed team has started.",
-        "fr": "Un match d'une équipe suivie a commencé."
+        "fr": "Un match d'une équipe suivie a commencé.",
+        "de": "Ein Spiel eines verfolgten Teams hat begonnen.",
+        "es": "Ha empezado un partido de un equipo seguido."
       },
       "fields": [
         {
@@ -521,7 +679,9 @@
           "source": "devices",
           "label": {
             "en": "Team",
-            "fr": "Équipe"
+            "fr": "Équipe",
+            "de": "Team",
+            "es": "Equipo"
           }
         },
         {
@@ -529,21 +689,27 @@
           "type": "select",
           "label": {
             "en": "Home or away",
-            "fr": "Domicile ou extérieur"
+            "fr": "Domicile ou extérieur",
+            "de": "Heim oder auswärts",
+            "es": "Local o visitante"
           },
           "options": [
             {
               "value": "home",
               "label": {
                 "en": "Home",
-                "fr": "Domicile"
+                "fr": "Domicile",
+                "de": "Heim",
+                "es": "Local"
               }
             },
             {
               "value": "away",
               "label": {
                 "en": "Away",
-                "fr": "Extérieur"
+                "fr": "Extérieur",
+                "de": "Auswärts",
+                "es": "Visitante"
               }
             }
           ]
@@ -555,7 +721,9 @@
           "type": "string",
           "label": {
             "en": "Team",
-            "fr": "Équipe"
+            "fr": "Équipe",
+            "de": "Team",
+            "es": "Equipo"
           }
         },
         {
@@ -563,7 +731,9 @@
           "type": "string",
           "label": {
             "en": "Opponent",
-            "fr": "Adversaire"
+            "fr": "Adversaire",
+            "de": "Gegner",
+            "es": "Rival"
           }
         },
         {
@@ -571,7 +741,9 @@
           "type": "string",
           "label": {
             "en": "Home or away (home, away)",
-            "fr": "Domicile ou extérieur (home, away)"
+            "fr": "Domicile ou extérieur (home, away)",
+            "de": "Heim oder auswärts (home, away)",
+            "es": "Local o visitante (home, away)"
           }
         },
         {
@@ -579,7 +751,9 @@
           "type": "string",
           "label": {
             "en": "League",
-            "fr": "Ligue"
+            "fr": "Ligue",
+            "de": "Liga",
+            "es": "Liga"
           }
         },
         {
@@ -587,7 +761,9 @@
           "type": "number",
           "label": {
             "en": "Team score",
-            "fr": "Score de l'équipe"
+            "fr": "Score de l'équipe",
+            "de": "Punkte des Teams",
+            "es": "Puntos del equipo"
           }
         },
         {
@@ -595,7 +771,9 @@
           "type": "number",
           "label": {
             "en": "Opponent score",
-            "fr": "Score adverse"
+            "fr": "Score adverse",
+            "de": "Punkte des Gegners",
+            "es": "Puntos del rival"
           }
         },
         {
@@ -603,7 +781,9 @@
           "type": "string",
           "label": {
             "en": "Summary",
-            "fr": "Résumé"
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
           }
         }
       ]
@@ -612,11 +792,15 @@
       "key": "team_scored",
       "label": {
         "en": "My team scored",
-        "fr": "Mon équipe a marqué"
+        "fr": "Mon équipe a marqué",
+        "de": "Mein Team hat gepunktet",
+        "es": "Mi equipo ha marcado"
       },
       "description": {
         "en": "A followed team scored (a goal, a try, a touchdown, a basket…).",
-        "fr": "Une équipe suivie a marqué (but, essai, touchdown, panier…)."
+        "fr": "Une équipe suivie a marqué (but, essai, touchdown, panier…).",
+        "de": "Ein verfolgtes Team hat gepunktet (Tor, Versuch, Touchdown, Korb…).",
+        "es": "Un equipo seguido ha marcado (gol, ensayo, touchdown, canasta…)."
       },
       "fields": [
         {
@@ -625,7 +809,9 @@
           "source": "devices",
           "label": {
             "en": "Team",
-            "fr": "Équipe"
+            "fr": "Équipe",
+            "de": "Team",
+            "es": "Equipo"
           }
         },
         {
@@ -633,21 +819,27 @@
           "type": "select",
           "label": {
             "en": "Home or away",
-            "fr": "Domicile ou extérieur"
+            "fr": "Domicile ou extérieur",
+            "de": "Heim oder auswärts",
+            "es": "Local o visitante"
           },
           "options": [
             {
               "value": "home",
               "label": {
                 "en": "Home",
-                "fr": "Domicile"
+                "fr": "Domicile",
+                "de": "Heim",
+                "es": "Local"
               }
             },
             {
               "value": "away",
               "label": {
                 "en": "Away",
-                "fr": "Extérieur"
+                "fr": "Extérieur",
+                "de": "Auswärts",
+                "es": "Visitante"
               }
             }
           ]
@@ -659,7 +851,9 @@
           "type": "string",
           "label": {
             "en": "Team",
-            "fr": "Équipe"
+            "fr": "Équipe",
+            "de": "Team",
+            "es": "Equipo"
           }
         },
         {
@@ -667,7 +861,9 @@
           "type": "string",
           "label": {
             "en": "Opponent",
-            "fr": "Adversaire"
+            "fr": "Adversaire",
+            "de": "Gegner",
+            "es": "Rival"
           }
         },
         {
@@ -675,7 +871,9 @@
           "type": "string",
           "label": {
             "en": "Home or away (home, away)",
-            "fr": "Domicile ou extérieur (home, away)"
+            "fr": "Domicile ou extérieur (home, away)",
+            "de": "Heim oder auswärts (home, away)",
+            "es": "Local o visitante (home, away)"
           }
         },
         {
@@ -683,7 +881,9 @@
           "type": "string",
           "label": {
             "en": "League",
-            "fr": "Ligue"
+            "fr": "Ligue",
+            "de": "Liga",
+            "es": "Liga"
           }
         },
         {
@@ -691,7 +891,9 @@
           "type": "number",
           "label": {
             "en": "Team score",
-            "fr": "Score de l'équipe"
+            "fr": "Score de l'équipe",
+            "de": "Punkte des Teams",
+            "es": "Puntos del equipo"
           }
         },
         {
@@ -699,7 +901,9 @@
           "type": "number",
           "label": {
             "en": "Opponent score",
-            "fr": "Score adverse"
+            "fr": "Score adverse",
+            "de": "Punkte des Gegners",
+            "es": "Puntos del rival"
           }
         },
         {
@@ -707,7 +911,9 @@
           "type": "string",
           "label": {
             "en": "Summary",
-            "fr": "Résumé"
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
           }
         },
         {
@@ -715,7 +921,9 @@
           "type": "number",
           "label": {
             "en": "Points scored",
-            "fr": "Points marqués"
+            "fr": "Points marqués",
+            "de": "Erzielte Punkte",
+            "es": "Puntos marcados"
           }
         }
       ]
@@ -724,11 +932,15 @@
       "key": "opponent_scored",
       "label": {
         "en": "Opponent scored",
-        "fr": "L'adversaire a marqué"
+        "fr": "L'adversaire a marqué",
+        "de": "Gegner hat gepunktet",
+        "es": "El rival ha marcado"
       },
       "description": {
         "en": "The opponent of a followed team scored.",
-        "fr": "L'adversaire d'une équipe suivie a marqué."
+        "fr": "L'adversaire d'une équipe suivie a marqué.",
+        "de": "Der Gegner eines verfolgten Teams hat gepunktet.",
+        "es": "El rival de un equipo seguido ha marcado."
       },
       "fields": [
         {
@@ -737,7 +949,9 @@
           "source": "devices",
           "label": {
             "en": "Team",
-            "fr": "Équipe"
+            "fr": "Équipe",
+            "de": "Team",
+            "es": "Equipo"
           }
         },
         {
@@ -745,21 +959,27 @@
           "type": "select",
           "label": {
             "en": "Home or away",
-            "fr": "Domicile ou extérieur"
+            "fr": "Domicile ou extérieur",
+            "de": "Heim oder auswärts",
+            "es": "Local o visitante"
           },
           "options": [
             {
               "value": "home",
               "label": {
                 "en": "Home",
-                "fr": "Domicile"
+                "fr": "Domicile",
+                "de": "Heim",
+                "es": "Local"
               }
             },
             {
               "value": "away",
               "label": {
                 "en": "Away",
-                "fr": "Extérieur"
+                "fr": "Extérieur",
+                "de": "Auswärts",
+                "es": "Visitante"
               }
             }
           ]
@@ -771,7 +991,9 @@
           "type": "string",
           "label": {
             "en": "Team",
-            "fr": "Équipe"
+            "fr": "Équipe",
+            "de": "Team",
+            "es": "Equipo"
           }
         },
         {
@@ -779,7 +1001,9 @@
           "type": "string",
           "label": {
             "en": "Opponent",
-            "fr": "Adversaire"
+            "fr": "Adversaire",
+            "de": "Gegner",
+            "es": "Rival"
           }
         },
         {
@@ -787,7 +1011,9 @@
           "type": "string",
           "label": {
             "en": "Home or away (home, away)",
-            "fr": "Domicile ou extérieur (home, away)"
+            "fr": "Domicile ou extérieur (home, away)",
+            "de": "Heim oder auswärts (home, away)",
+            "es": "Local o visitante (home, away)"
           }
         },
         {
@@ -795,7 +1021,9 @@
           "type": "string",
           "label": {
             "en": "League",
-            "fr": "Ligue"
+            "fr": "Ligue",
+            "de": "Liga",
+            "es": "Liga"
           }
         },
         {
@@ -803,7 +1031,9 @@
           "type": "number",
           "label": {
             "en": "Team score",
-            "fr": "Score de l'équipe"
+            "fr": "Score de l'équipe",
+            "de": "Punkte des Teams",
+            "es": "Puntos del equipo"
           }
         },
         {
@@ -811,7 +1041,9 @@
           "type": "number",
           "label": {
             "en": "Opponent score",
-            "fr": "Score adverse"
+            "fr": "Score adverse",
+            "de": "Punkte des Gegners",
+            "es": "Puntos del rival"
           }
         },
         {
@@ -819,7 +1051,9 @@
           "type": "string",
           "label": {
             "en": "Summary",
-            "fr": "Résumé"
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
           }
         },
         {
@@ -827,7 +1061,9 @@
           "type": "number",
           "label": {
             "en": "Points scored",
-            "fr": "Points marqués"
+            "fr": "Points marqués",
+            "de": "Erzielte Punkte",
+            "es": "Puntos marcados"
           }
         }
       ]
@@ -836,11 +1072,15 @@
       "key": "match_ended",
       "label": {
         "en": "Match ended",
-        "fr": "Match terminé"
+        "fr": "Match terminé",
+        "de": "Spiel beendet",
+        "es": "Partido terminado"
       },
       "description": {
         "en": "A match of a followed team is over, with its result.",
-        "fr": "Un match d'une équipe suivie est terminé, avec son résultat."
+        "fr": "Un match d'une équipe suivie est terminé, avec son résultat.",
+        "de": "Ein Spiel eines verfolgten Teams ist vorbei, mit seinem Ergebnis.",
+        "es": "Un partido de un equipo seguido ha terminado, con su resultado."
       },
       "fields": [
         {
@@ -849,7 +1089,9 @@
           "source": "devices",
           "label": {
             "en": "Team",
-            "fr": "Équipe"
+            "fr": "Équipe",
+            "de": "Team",
+            "es": "Equipo"
           }
         },
         {
@@ -857,21 +1099,27 @@
           "type": "select",
           "label": {
             "en": "Home or away",
-            "fr": "Domicile ou extérieur"
+            "fr": "Domicile ou extérieur",
+            "de": "Heim oder auswärts",
+            "es": "Local o visitante"
           },
           "options": [
             {
               "value": "home",
               "label": {
                 "en": "Home",
-                "fr": "Domicile"
+                "fr": "Domicile",
+                "de": "Heim",
+                "es": "Local"
               }
             },
             {
               "value": "away",
               "label": {
                 "en": "Away",
-                "fr": "Extérieur"
+                "fr": "Extérieur",
+                "de": "Auswärts",
+                "es": "Visitante"
               }
             }
           ]
@@ -881,28 +1129,36 @@
           "type": "multi_select",
           "label": {
             "en": "Result",
-            "fr": "Résultat"
+            "fr": "Résultat",
+            "de": "Ergebnis",
+            "es": "Resultado"
           },
           "options": [
             {
               "value": "win",
               "label": {
                 "en": "Win",
-                "fr": "Victoire"
+                "fr": "Victoire",
+                "de": "Sieg",
+                "es": "Victoria"
               }
             },
             {
               "value": "loss",
               "label": {
                 "en": "Loss",
-                "fr": "Défaite"
+                "fr": "Défaite",
+                "de": "Niederlage",
+                "es": "Derrota"
               }
             },
             {
               "value": "draw",
               "label": {
                 "en": "Draw",
-                "fr": "Match nul"
+                "fr": "Match nul",
+                "de": "Unentschieden",
+                "es": "Empate"
               }
             }
           ]
@@ -914,7 +1170,9 @@
           "type": "string",
           "label": {
             "en": "Team",
-            "fr": "Équipe"
+            "fr": "Équipe",
+            "de": "Team",
+            "es": "Equipo"
           }
         },
         {
@@ -922,7 +1180,9 @@
           "type": "string",
           "label": {
             "en": "Opponent",
-            "fr": "Adversaire"
+            "fr": "Adversaire",
+            "de": "Gegner",
+            "es": "Rival"
           }
         },
         {
@@ -930,7 +1190,9 @@
           "type": "string",
           "label": {
             "en": "Home or away (home, away)",
-            "fr": "Domicile ou extérieur (home, away)"
+            "fr": "Domicile ou extérieur (home, away)",
+            "de": "Heim oder auswärts (home, away)",
+            "es": "Local o visitante (home, away)"
           }
         },
         {
@@ -938,7 +1200,9 @@
           "type": "string",
           "label": {
             "en": "League",
-            "fr": "Ligue"
+            "fr": "Ligue",
+            "de": "Liga",
+            "es": "Liga"
           }
         },
         {
@@ -946,7 +1210,9 @@
           "type": "number",
           "label": {
             "en": "Team score",
-            "fr": "Score de l'équipe"
+            "fr": "Score de l'équipe",
+            "de": "Punkte des Teams",
+            "es": "Puntos del equipo"
           }
         },
         {
@@ -954,7 +1220,9 @@
           "type": "number",
           "label": {
             "en": "Opponent score",
-            "fr": "Score adverse"
+            "fr": "Score adverse",
+            "de": "Punkte des Gegners",
+            "es": "Puntos del rival"
           }
         },
         {
@@ -962,7 +1230,9 @@
           "type": "string",
           "label": {
             "en": "Summary",
-            "fr": "Résumé"
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
           }
         },
         {
@@ -970,7 +1240,9 @@
           "type": "string",
           "label": {
             "en": "Result (win, loss, draw)",
-            "fr": "Résultat (win, loss, draw)"
+            "fr": "Résultat (win, loss, draw)",
+            "de": "Ergebnis (win, loss, draw)",
+            "es": "Resultado (win, loss, draw)"
           }
         }
       ]
@@ -981,11 +1253,15 @@
       "key": "get_match",
       "label": {
         "en": "Get the match of a team",
-        "fr": "Lire le match d'une équipe"
+        "fr": "Lire le match d'une équipe",
+        "de": "Spiel eines Teams lesen",
+        "es": "Leer el partido de un equipo"
       },
       "description": {
         "en": "Current or next match of a followed team, for the following actions.",
-        "fr": "Match en cours ou à venir d'une équipe suivie, pour les actions suivantes."
+        "fr": "Match en cours ou à venir d'une équipe suivie, pour les actions suivantes.",
+        "de": "Laufendes oder nächstes Spiel eines verfolgten Teams, für die folgenden Aktionen.",
+        "es": "Partido en curso o próximo de un equipo seguido, para las acciones siguientes."
       },
       "timeout_seconds": 10,
       "fields": [
@@ -995,7 +1271,9 @@
           "source": "devices",
           "label": {
             "en": "Team",
-            "fr": "Équipe"
+            "fr": "Équipe",
+            "de": "Team",
+            "es": "Equipo"
           },
           "required": true
         }
@@ -1006,7 +1284,9 @@
           "type": "string",
           "label": {
             "en": "State (pre, in, post, none)",
-            "fr": "État (pre, in, post, none)"
+            "fr": "État (pre, in, post, none)",
+            "de": "Zustand (pre, in, post, none)",
+            "es": "Estado (pre, in, post, none)"
           }
         },
         {
@@ -1014,7 +1294,9 @@
           "type": "boolean",
           "label": {
             "en": "Match live",
-            "fr": "Match en direct"
+            "fr": "Match en direct",
+            "de": "Spiel läuft",
+            "es": "Partido en directo"
           }
         },
         {
@@ -1022,7 +1304,9 @@
           "type": "number",
           "label": {
             "en": "Team score",
-            "fr": "Score de l'équipe"
+            "fr": "Score de l'équipe",
+            "de": "Punkte des Teams",
+            "es": "Puntos del equipo"
           }
         },
         {
@@ -1030,7 +1314,9 @@
           "type": "number",
           "label": {
             "en": "Opponent score",
-            "fr": "Score adverse"
+            "fr": "Score adverse",
+            "de": "Punkte des Gegners",
+            "es": "Puntos del rival"
           }
         },
         {
@@ -1038,7 +1324,9 @@
           "type": "string",
           "label": {
             "en": "Opponent",
-            "fr": "Adversaire"
+            "fr": "Adversaire",
+            "de": "Gegner",
+            "es": "Rival"
           }
         },
         {
@@ -1046,7 +1334,9 @@
           "type": "string",
           "label": {
             "en": "Kickoff (ISO date)",
-            "fr": "Coup d'envoi (date ISO)"
+            "fr": "Coup d'envoi (date ISO)",
+            "de": "Anstoß (ISO-Datum)",
+            "es": "Inicio (fecha ISO)"
           }
         },
         {
@@ -1054,7 +1344,9 @@
           "type": "string",
           "label": {
             "en": "Result (win, loss, draw)",
-            "fr": "Résultat (win, loss, draw)"
+            "fr": "Résultat (win, loss, draw)",
+            "de": "Ergebnis (win, loss, draw)",
+            "es": "Resultado (win, loss, draw)"
           }
         },
         {
@@ -1062,7 +1354,9 @@
           "type": "string",
           "label": {
             "en": "Summary",
-            "fr": "Résumé"
+            "fr": "Résumé",
+            "de": "Zusammenfassung",
+            "es": "Resumen"
           }
         }
       ]
@@ -1073,11 +1367,15 @@
       "key": "team_match",
       "label": {
         "en": "Team match",
-        "fr": "Match d'une équipe"
+        "fr": "Match d'une équipe",
+        "de": "Spiel eines Teams",
+        "es": "Partido de un equipo"
       },
       "description": {
         "en": "Live score, clock and kickoff of one followed team.",
-        "fr": "Score en direct, chrono et coup d'envoi d'une équipe suivie."
+        "fr": "Score en direct, chrono et coup d'envoi d'une équipe suivie.",
+        "de": "Live-Ergebnis, Spielzeit und Anstoß eines verfolgten Teams.",
+        "es": "Resultado en directo, reloj e inicio de un equipo seguido."
       },
       "icon": "award",
       "settings": [
@@ -1087,7 +1385,9 @@
           "source": "devices",
           "label": {
             "en": "Team",
-            "fr": "Équipe"
+            "fr": "Équipe",
+            "de": "Team",
+            "es": "Equipo"
           },
           "required": true
         }
@@ -1098,11 +1398,15 @@
       "key": "my_teams",
       "label": {
         "en": "My teams",
-        "fr": "Mes équipes"
+        "fr": "Mes équipes",
+        "de": "Meine Teams",
+        "es": "Mis equipos"
       },
       "description": {
         "en": "Every followed team: live score, last result or next match.",
-        "fr": "Toutes les équipes suivies : score en direct, dernier résultat ou prochain match."
+        "fr": "Toutes les équipes suivies : score en direct, dernier résultat ou prochain match.",
+        "de": "Alle verfolgten Teams: Live-Ergebnis, letztes Ergebnis oder nächstes Spiel.",
+        "es": "Todos los equipos seguidos: resultado en directo, último resultado o próximo partido."
       },
       "icon": "list",
       "action_timeout_seconds": 30

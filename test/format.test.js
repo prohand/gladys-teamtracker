@@ -1,12 +1,14 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { matchFromEvent } from '../src/espn/parse.js';
-import { formatKickoff, formatStatus } from '../src/format.js';
+import { formatKickoff, formatStatus, LANGUAGES, multilingual, words } from '../src/format.js';
 import { fixture, withState } from './helpers/fakeEspn.js';
 
 const base = fixture('lig1-scoreboard').events[0]; // NICE (2502) – STR (180)
 const en = { language: 'en', timezone: 'Europe/Paris' };
 const fr = { language: 'fr', timezone: 'Europe/Paris' };
+const de = { language: 'de', timezone: 'Europe/Paris' };
+const es = { language: 'es', timezone: 'Europe/Paris' };
 
 function match(change) {
   return matchFromEvent(withState(base, { date: '2026-10-18T13:00:00Z', ...change }), '2502');
@@ -31,6 +33,35 @@ test('the status line of every phase, in English and French', () => {
   assert.equal(formatStatus(canceled, fr), 'Annulé · NICE contre STR');
 
   assert.equal(formatStatus(null, fr), 'Aucun match prévu');
+});
+
+test('the status line in German and Spanish', () => {
+  const live = match({ state: 'in', detail: 'HT', name: 'STATUS_HALFTIME' });
+  assert.equal(formatStatus(live, de), 'Live · Halbzeit · NICE 0 – 0 STR');
+  assert.equal(formatStatus(live, es), 'En directo · Descanso · NICE 0 – 0 STR');
+
+  const final = match({ state: 'post', scores: { 180: 2 } });
+  assert.equal(formatStatus(final, de), 'Beendet · NICE 0 – 2 STR · Niederlage');
+  assert.equal(formatStatus(final, es), 'Finalizado · NICE 0 – 2 STR · Derrota');
+
+  const next = match({ state: 'pre' });
+  assert.match(formatStatus(next, de), /^Nächstes Spiel · .*18.* · gegen STR$/);
+  assert.match(formatStatus(next, es), /^Próximo partido · .*18.* · contra STR$/);
+
+  assert.equal(formatStatus(null, de), 'Kein Spiel geplant');
+  assert.equal(formatStatus(null, es), 'Ningún partido previsto');
+});
+
+test('every language has every word, and an unknown one falls back to English', () => {
+  assert.deepEqual(LANGUAGES, ['en', 'fr', 'de', 'es']);
+  for (const language of LANGUAGES) {
+    assert.deepEqual(Object.keys(words(language)), Object.keys(words('en')), language);
+  }
+  assert.equal(words('it'), words('en'));
+  assert.deepEqual(
+    multilingual((language) => language.toUpperCase()),
+    { en: 'EN', fr: 'FR', de: 'DE', es: 'ES' },
+  );
 });
 
 test('the next match, in the configured time zone', () => {

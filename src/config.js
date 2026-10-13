@@ -7,6 +7,7 @@
 // parses the list of followed teams.
 // -----------------------------------------------------------------------------
 
+import { LANGUAGES } from './format.js';
 import { parseLeague } from './leagues.js';
 
 // Defaults: they MUST stay consistent with the `default` values declared in
@@ -22,8 +23,6 @@ export const DEFAULT_CONFIG = {
 
 // More teams would mean more ESPN requests than a hobby API deserves.
 export const MAX_TEAMS = 20;
-
-const LANGUAGES = ['en', 'fr'];
 
 function clampNumber(value, fallback, min, max) {
   const number = Number(value);
