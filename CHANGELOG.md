@@ -10,6 +10,8 @@ notes of the version's GitHub Release.
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-10-13
+
 ### Added
 
 - German and Spanish translations (configuration screen, messages, widgets,
@@ -57,6 +59,7 @@ notes of the version's GitHub Release.
   ESLint, tests on Node 22 and 24, store checks and Docker build on pull requests) and
   UI-driven releases.
 
-[Unreleased]: https://github.com/prohand/gladys-teamtracker/compare/v1.0.2...HEAD
+[Unreleased]: https://github.com/prohand/gladys-teamtracker/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/prohand/gladys-teamtracker/compare/v1.0.2...v1.1.0
 [1.0.2]: https://github.com/prohand/gladys-teamtracker/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/prohand/gladys-teamtracker/releases/tag/v1.0.1
