@@ -1,17 +1,17 @@
 # Team Tracker
 
-Verfolgen Sie Ihre Sportteams in Gladys: Live-Ergebnisse, das nächste Spiel und Szenen,
-die ausgeführt werden, wenn Ihr Team punktet oder gewinnt.
+Verfolge deine Sportteams in Gladys: Live-Ergebnisse, das nächste Spiel und Szenen,
+die ausgeführt werden, wenn dein Team punktet oder gewinnt.
 
 > **Beta.** Die Ergebnisse stammen aus der öffentlichen API von ESPN, die kostenlos, aber
 > nicht dokumentiert ist: Sie kann sich ohne Vorankündigung ändern. Feedback ist im
 > [GitHub-Repository](https://github.com/prohand/gladys-teamtracker/issues) oder im
 > [Gladys-Forum](https://community.gladysassistant.com/) willkommen.
 
-## Was Sie erhalten
+## Was du erhältst
 
 - **Ein Gerät pro Team**, mit drei Werten:
-  - **Punkte**: die Punkte Ihres Teams im laufenden (oder letzten) Spiel;
+  - **Punkte**: die Punkte deines Teams im laufenden (oder letzten) Spiel;
   - **Punkte des Gegners**;
   - **Spiel**: eine Zeile, z. B. `Live · 63' · PSG 2 – 1 OM`,
     `Beendet · PSG 2 – 1 OM · Sieg` oder `Nächstes Spiel · Sa., 17. Okt., 17:15 · bei STR`.
@@ -19,16 +19,16 @@ die ausgeführt werden, wenn Ihr Team punktet oder gewinnt.
   Gegner hat gepunktet, Spiel beendet.
 - **Eine Szenen-Aktion**, die das Spiel eines Teams liest, um das Ergebnis anzusagen oder
   das Licht je nach Ergebnis zu ändern.
-- **Zwei Dashboard-Widgets**: das laufende Spiel eines Teams und die Liste aller Ihrer
+- **Zwei Dashboard-Widgets**: das laufende Spiel eines Teams und die Liste aller deiner
   Teams.
 
-Kein Konto, kein API-Schlüssel, nichts in Ihrem Netzwerk zu installieren. Gladys 5.1 oder
+Kein Konto, kein API-Schlüssel, nichts in deinem Netzwerk zu installieren. Gladys 5.1 oder
 neuer ist erforderlich.
 
 ## Konfiguration
 
-1. Öffnen Sie den Tab **Konfiguration** der Integration.
-2. Tragen Sie unter **Teams** die zu verfolgenden Teams als `LIGA:TEAM` ein, durch Kommas
+1. Öffne den Tab **Konfiguration** der Integration.
+2. Trage unter **Teams** die zu verfolgenden Teams als `LIGA:TEAM` ein, durch Kommas
    getrennt:
 
    ```
@@ -37,15 +37,15 @@ neuer ist erforderlich.
 
    - `LIGA` ist ein Code aus der [Tabelle unten](#ligen).
    - `TEAM` ist die Abkürzung des Teams (`PSG`, `KC`) oder seine ESPN-ID (`160`).
-   - Unsicher? Klicken Sie auf **Team suchen**, wählen Sie die Liga und geben Sie einen
+   - Unsicher? Klicke auf **Team suchen**, wähle die Liga und gib einen
      Teil des Namens ein: Die Integration listet die genauen Zeilen zum Einfügen auf.
 
-3. Wählen Sie die **Sprache** der Spieltexte und Ihre **Zeitzone** (z. B.
+3. Wähle die **Sprache** der Spieltexte und deine **Zeitzone** (z. B.
    `Europe/Berlin`, `Europe/Paris`), die für die Anstoßzeiten verwendet wird.
-4. Speichern Sie und klicken Sie dann auf **Teams testen**: Jedes Team wird mit seinem
+4. Speichere und klicke dann auf **Teams testen**: Jedes Team wird mit seinem
    laufenden oder nächsten Spiel aufgelistet, und jeder Eintrag, der nicht verfolgt werden
    kann, nennt den Grund.
-5. Öffnen Sie den Tab **Entdecken** und fügen Sie die Team-Geräte hinzu.
+5. Öffne den Tab **Entdecken** und füge die Team-Geräte mit **Zu Gladys hinzufügen** hinzu.
 
 ### Weitere Einstellungen
 
@@ -57,7 +57,7 @@ neuer ist erforderlich.
 | Zeitzone                                | Europe/Paris | Anstoßzeiten werden in dieser Zone angegeben (IANA-Name).     |
 | Sprache der Spieltexte                  | Englisch     | Sprache der Zeile „Spiel“ und des `summary` der Szenen.       |
 
-Die Integration wird für die Erinnerung und den Anstoß von selbst aktiv: Sie brauchen
+Die Integration wird für die Erinnerung und den Anstoß von selbst aktiv: Du brauchst
 keine kurze Aktualisierung, um den Beginn eines Spiels mitzubekommen.
 
 ## Ligen
@@ -85,7 +85,7 @@ sind die beiden Teile nach `/sports/` in den Adressen der ESPN-API.
 **Ein Team in zwei Wettbewerben** (Ligue 1 und Champions League) sind zwei Einträge:
 `LIG1:PSG, CL:PSG`. Jeder ist ein eigenes Gerät.
 
-**Gleiche Abkürzung für zwei Teams** (drei Teams der Top 14 heißen `STA`): Verwenden Sie
+**Gleiche Abkürzung für zwei Teams** (drei Teams der Top 14 heißen `STA`): Verwende
 die ESPN-ID, die **Team suchen** angibt (`TOP14:25922` für Stade Toulousain).
 
 Einzelsportarten (Tennis, Golf, F1, MMA) werden nicht unterstützt: Ein Spiel dort besteht
@@ -102,7 +102,7 @@ Die Integration fügt dem Szenen-Editor eigene Karten hinzu, in der Kategorie
 | ----------------------- | --------------------------------------------------------------------- |
 | Spiel beginnt bald      | Die Erinnerung vor Anstoß ist fällig (standardmäßig 30 min).          |
 | Spiel begonnen          | Das Spiel hat begonnen.                                               |
-| Mein Team hat gepunktet | Die Punkte Ihres Teams sind gestiegen (Tor, Versuch, …).              |
+| Mein Team hat gepunktet | Die Punkte deines Teams sind gestiegen (Tor, Versuch, …).             |
 | Gegner hat gepunktet    | Die Punkte des Gegners sind gestiegen.                                |
 | Spiel beendet           | Das Spiel ist vorbei; filterbar nach Sieg, Niederlage, Unentschieden. |
 
@@ -148,7 +148,7 @@ vergleichen („nur wenn mein Team führt“).
 
 ## Dashboard
 
-- **Spiel eines Teams**: Wählen Sie in den Widget-Einstellungen ein Team. Live-Ergebnis
+- **Spiel eines Teams**: Wähle in den Widget-Einstellungen ein Team. Live-Ergebnis
   (es folgt den Gerätewerten in Echtzeit, sobald das Gerät erstellt ist), Spielzeit,
   Anstoß, Gegner, Heim oder auswärts und eine Schaltfläche **Aktualisieren**.
 - **Meine Teams**: alle verfolgten Teams mit ihrem Logo, laufende Spiele zuerst, mit einem
@@ -156,15 +156,15 @@ vergleichen („nur wenn mein Team führt“).
 
 ## Fehlerbehebung
 
-- **Ein Team fehlt in Entdecken**: Klicken Sie auf **Teams testen**, es nennt den Grund
+- **Ein Team fehlt in Entdecken**: Klicke auf **Teams testen**, es nennt den Grund
   (unbekannte Liga, Team nicht gefunden, Abkürzung von mehreren Teams geteilt, ESPN nicht
   erreichbar).
 - **Das Abzeichen eines Teams zeigt „Nicht erreichbar“**: ESPN hat auf die letzte Abfrage
   nicht geantwortet. Die zuletzt bekannten Ergebnisse bleiben angezeigt; die nächste
   Abfrage versucht es erneut.
-- **Die Anstoßzeiten sind um einige Stunden verschoben**: Stellen Sie Ihre **Zeitzone**
+- **Die Anstoßzeiten sind um einige Stunden verschoben**: Stelle deine **Zeitzone**
   ein.
-- **Protokolle**: Öffnen Sie die Protokolle der Integration in Gladys. Jedes
+- **Protokolle**: Öffne den Tab **Protokolle** der Integration in Gladys. Jedes
   Szenen-Ereignis wird protokolliert (`Scene event team_scored <- LIG1:PSG: …`).
 
 ## Datenschutz

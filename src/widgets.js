@@ -219,7 +219,7 @@ function myTeamsContent(tracker, config) {
           text: {
             en: 'No team followed yet: add some in the integration configuration.',
             fr: "Aucune équipe suivie : ajoutez-en dans la configuration de l'intégration.",
-            de: 'Noch kein Team verfolgt: Fügen Sie welche in der Konfiguration der Integration hinzu.',
+            de: 'Noch kein Team verfolgt: Füge welche in der Konfiguration der Integration hinzu.',
             es: 'Aún no sigue ningún equipo: añada alguno en la configuración de la integración.',
           },
         },
@@ -299,7 +299,7 @@ export function createWidgets(tracker) {
                 text: {
                   en: 'Pick a followed team in the settings of this widget.',
                   fr: 'Choisissez une équipe suivie dans les réglages de ce widget.',
-                  de: 'Wählen Sie in den Einstellungen dieses Widgets ein verfolgtes Team.',
+                  de: 'Wähle in den Einstellungen dieses Widgets ein verfolgtes Team.',
                   es: 'Elija un equipo seguido en los ajustes de este widget.',
                 },
               },

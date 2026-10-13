@@ -42,7 +42,7 @@ required.
    `America/New_York`, `Europe/Paris`), used to write kickoff times.
 4. Save, then click **Test the teams**: every team is listed with its current or next
    match, and every entry that cannot be followed says why.
-5. Open the **Discovery** tab and add the team devices.
+5. Open the **Discover** tab and add the team devices with **Add to Gladys**.
 
 ### Other settings
 
@@ -149,12 +149,12 @@ my team leads").
 
 ## Troubleshooting
 
-- **A team is missing from Discovery**: click **Test the teams**, it says why (unknown
+- **A team is missing from the Discover tab**: click **Test the teams**, it says why (unknown
   league, team not found, abbreviation shared by several teams, ESPN unreachable).
 - **The badge of a team is "unreachable"**: ESPN did not answer the last reading. The
   last known scores stay displayed; the next reading tries again.
 - **Kickoff times are off by some hours**: set your **Time zone**.
-- **Logs**: open the integration logs in Gladys. Each scene event is logged
+- **Logs**: open the integration's **Logs** tab in Gladys. Each scene event is logged
   (`Scene event team_scored <- LIG1:PSG: …`).
 
 ## Privacy

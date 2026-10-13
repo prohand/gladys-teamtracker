@@ -5,7 +5,7 @@
   "description": {
     "en": "Follow your sports teams: live scores, next match, and scenes when your team scores.",
     "fr": "Suivez vos équipes : scores en direct, prochain match et scènes quand votre équipe marque.",
-    "de": "Verfolgen Sie Ihre Teams: Live-Ergebnisse, nächstes Spiel und Szenen, wenn Ihr Team punktet.",
+    "de": "Verfolge deine Teams: Live-Ergebnisse, nächstes Spiel und Szenen, wenn dein Team punktet.",
     "es": "Siga a sus equipos: resultados en directo, próximo partido y escenas cuando su equipo marca."
   },
   "version": "1.0.2",
@@ -25,9 +25,9 @@
         "es": "Primeros pasos"
       },
       "description": {
-        "en": "Scores come from the public ESPN API: no account, no key. Write the teams to follow as LEAGUE:TEAM, separated by commas, e.g. LIG1:PSG, TOP14:RAC, NFL:KC. Not sure of the abbreviation? Use the \"Find a team\" button below. Each team becomes a device in the Discovery tab.",
+        "en": "Scores come from the public ESPN API: no account, no key. Write the teams to follow as LEAGUE:TEAM, separated by commas, e.g. LIG1:PSG, TOP14:RAC, NFL:KC. Not sure of the abbreviation? Use the \"Find a team\" button below. Each team becomes a device in the Discover tab.",
         "fr": "Les scores viennent de l'API publique d'ESPN : pas de compte, pas de clé. Écrivez les équipes à suivre sous la forme LIGUE:ÉQUIPE, séparées par des virgules, par ex. LIG1:PSG, TOP14:RAC, NFL:KC. Pas sûr de l'abréviation ? Utilisez le bouton « Trouver une équipe » plus bas. Chaque équipe devient un appareil dans l'onglet Découverte.",
-        "de": "Die Ergebnisse stammen aus der öffentlichen ESPN-API: kein Konto, kein Schlüssel. Schreiben Sie die zu verfolgenden Teams als LIGA:TEAM, durch Kommas getrennt, z. B. LIG1:PSG, TOP14:RAC, NFL:KC. Unsicher bei der Abkürzung? Nutzen Sie unten die Schaltfläche „Team suchen“. Jedes Team wird zu einem Gerät im Tab „Entdecken“.",
+        "de": "Die Ergebnisse stammen aus der öffentlichen ESPN-API: kein Konto, kein Schlüssel. Schreib die zu verfolgenden Teams als LIGA:TEAM, durch Kommas getrennt, z. B. LIG1:PSG, TOP14:RAC, NFL:KC. Unsicher bei der Abkürzung? Nutze unten die Schaltfläche „Team suchen“. Jedes Team wird zu einem Gerät im Tab „Entdecken“.",
         "es": "Los resultados proceden de la API pública de ESPN: sin cuenta ni clave. Escriba los equipos que desea seguir como LIGA:EQUIPO, separados por comas, p. ej. LIG1:PSG, TOP14:RAC, NFL:KC. ¿No está seguro de la abreviatura? Use el botón «Buscar un equipo» más abajo. Cada equipo se convierte en un dispositivo en la pestaña «Descubrir»."
       },
       "links": [

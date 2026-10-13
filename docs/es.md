@@ -45,7 +45,7 @@ posterior.
    `Europe/Madrid`, `Europe/Paris`), utilizada para escribir las horas de inicio.
 4. Guarde y pulse **Probar los equipos**: cada equipo aparece con su partido en curso o
    próximo, y cada entrada que no se puede seguir indica por qué.
-5. Abra la pestaña **Descubrir** y añada los dispositivos de los equipos.
+5. Abra la pestaña **Descubrir** y añada los dispositivos de los equipos con **Añadir a Gladys**.
 
 ### Otros ajustes
 
@@ -162,7 +162,7 @@ compararlos («solo si mi equipo va ganando»).
   lectura. Los últimos resultados conocidos siguen mostrándose; la siguiente lectura lo
   intenta de nuevo.
 - **Las horas de inicio están desfasadas varias horas**: configure su **Zona horaria**.
-- **Registros**: abra los registros de la integración en Gladys. Cada evento de escena
+- **Registros**: abra la pestaña **Registros** de la integración en Gladys. Cada evento de escena
   queda registrado (`Scene event team_scored <- LIG1:PSG: …`).
 
 ## Privacidad

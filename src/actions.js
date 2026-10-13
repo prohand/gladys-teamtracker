@@ -22,7 +22,7 @@ const REASONS = {
   format: {
     en: 'write it LEAGUE:TEAM, e.g. LIG1:PSG',
     fr: 'écrivez-la LIGUE:ÉQUIPE, par ex. LIG1:PSG',
-    de: 'schreiben Sie es als LIGA:TEAM, z. B. LIG1:PSG',
+    de: 'schreib es als LIGA:TEAM, z. B. LIG1:PSG',
     es: 'escríbalo como LIGA:EQUIPO, p. ej. LIG1:PSG',
   },
   league: {
@@ -46,13 +46,13 @@ const REASONS = {
   not_found: {
     en: 'no such team in this league, use "Find a team"',
     fr: 'équipe absente de cette ligue, utilisez « Trouver une équipe »',
-    de: 'kein solches Team in dieser Liga, nutzen Sie „Team suchen“',
+    de: 'kein solches Team in dieser Liga, nutze „Team suchen“',
     es: 'no existe ese equipo en esta liga, use «Buscar un equipo»',
   },
   unreachable: {
     en: 'ESPN did not answer, try again later',
     fr: "ESPN n'a pas répondu, réessayez plus tard",
-    de: 'ESPN hat nicht geantwortet, versuchen Sie es später erneut',
+    de: 'ESPN hat nicht geantwortet, versuch es später erneut',
     es: 'ESPN no ha respondido, inténtelo más tarde',
   },
 };
@@ -63,7 +63,7 @@ const AMBIGUOUS = {
   fr: (entry, choices) =>
     `${entry} : plusieurs équipes portent ce nom, écrivez plutôt ${choices.join(' ou ')}`,
   de: (entry, choices) =>
-    `${entry}: mehrere Teams tragen diesen Namen, schreiben Sie stattdessen ${choices.join(' oder ')}`,
+    `${entry}: mehrere Teams tragen diesen Namen, schreib stattdessen ${choices.join(' oder ')}`,
   es: (entry, choices) =>
     `${entry}: varios equipos llevan ese nombre, escriba mejor ${choices.join(' o ')}`,
 };
@@ -78,7 +78,7 @@ const FOUND = {
 const MORE = {
   en: (more) => `… and ${more} more, narrow the search.`,
   fr: (more) => `… et ${more} autres, affinez la recherche.`,
-  de: (more) => `… und ${more} weitere, verfeinern Sie die Suche.`,
+  de: (more) => `… und ${more} weitere, verfeinere die Suche.`,
   es: (more) => `… y ${more} más, afine la búsqueda.`,
 };
 
@@ -108,7 +108,7 @@ export async function testTeams(tracker) {
     return {
       en: 'No team to follow yet: write one in the Teams field, e.g. LIG1:PSG, NFL:KC.',
       fr: 'Aucune équipe à suivre : écrivez-en une dans le champ Équipes, par ex. LIG1:PSG, NFL:KC.',
-      de: 'Noch kein Team zu verfolgen: Tragen Sie eines in das Feld Teams ein, z. B. LIG1:PSG, NFL:KC.',
+      de: 'Noch kein Team zu verfolgen: Trage eines in das Feld Teams ein, z. B. LIG1:PSG, NFL:KC.',
       es: 'Aún no hay ningún equipo que seguir: escriba uno en el campo Equipos, p. ej. LIG1:PSG, NFL:KC.',
     };
   }

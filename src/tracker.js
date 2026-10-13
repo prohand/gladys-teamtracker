@@ -463,7 +463,7 @@ export class Tracker {
       message = {
         en: 'Add at least one team in the configuration, e.g. LIG1:PSG.',
         fr: 'Ajoutez au moins une équipe dans la configuration, par ex. LIG1:PSG.',
-        de: 'Fügen Sie mindestens ein Team in der Konfiguration hinzu, z. B. LIG1:PSG.',
+        de: 'Füge mindestens ein Team in der Konfiguration hinzu, z. B. LIG1:PSG.',
         es: 'Añada al menos un equipo en la configuración, p. ej. LIG1:PSG.',
       };
     } else if (problems.length > 0) {
@@ -471,7 +471,7 @@ export class Tracker {
       message = {
         en: `Not followed: ${list}. Use "Test the teams" to see why.`,
         fr: `Non suivies : ${list}. Utilisez « Tester les équipes » pour savoir pourquoi.`,
-        de: `Nicht verfolgt: ${list}. Nutzen Sie „Teams testen“, um den Grund zu erfahren.`,
+        de: `Nicht verfolgt: ${list}. Nutze „Teams testen“, um den Grund zu erfahren.`,
         es: `No seguidos: ${list}. Use «Probar los equipos» para saber por qué.`,
       };
     }
