@@ -38,6 +38,16 @@ const FEATURE_NAMES = {
     [FEATURE.OPPONENT_SCORE]: 'Score adverse',
     [FEATURE.STATUS]: 'Match',
   },
+  de: {
+    [FEATURE.TEAM_SCORE]: 'Punkte',
+    [FEATURE.OPPONENT_SCORE]: 'Punkte des Gegners',
+    [FEATURE.STATUS]: 'Spiel',
+  },
+  es: {
+    [FEATURE.TEAM_SCORE]: 'Puntos',
+    [FEATURE.OPPONENT_SCORE]: 'Puntos del rival',
+    [FEATURE.STATUS]: 'Partido',
+  },
 };
 
 // Highest score a feature accepts: basketball goes past 150, nothing past 999.

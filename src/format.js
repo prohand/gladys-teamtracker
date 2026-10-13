@@ -1,12 +1,16 @@
 // -----------------------------------------------------------------------------
-// Human texts about a match, in English or French.
+// Human texts about a match, in English, French, German or Spanish.
 //
 // A device `text` feature holds ONE string, so the status published on the
 // devices follows the `language` of the configuration. The widgets and the
-// action messages are multi-language objects ({ en, fr }) the core picks from.
+// action messages are multi-language objects ({ en, fr, de, es }) the core
+// picks from (English when the reader's language is none of them).
 // -----------------------------------------------------------------------------
 
-const LOCALES = { en: 'en-US', fr: 'fr-FR' };
+/** Every language this integration writes, English first (the fallback). */
+export const LANGUAGES = ['en', 'fr', 'de', 'es'];
+
+const LOCALES = { en: 'en-US', fr: 'fr-FR', de: 'de-DE', es: 'es-ES' };
 
 const WORDS = {
   en: {
@@ -38,6 +42,36 @@ const WORDS = {
     draw: 'Match nul',
     halftime: 'Mi-temps',
     unknown: 'Équipe inconnue',
+  },
+  de: {
+    live: 'Live',
+    final: 'Beendet',
+    next: 'Nächstes Spiel',
+    postponed: 'Verschoben',
+    canceled: 'Abgesagt',
+    noMatch: 'Kein Spiel geplant',
+    vs: 'gegen',
+    at: 'bei',
+    win: 'Sieg',
+    loss: 'Niederlage',
+    draw: 'Unentschieden',
+    halftime: 'Halbzeit',
+    unknown: 'Unbekanntes Team',
+  },
+  es: {
+    live: 'En directo',
+    final: 'Finalizado',
+    next: 'Próximo partido',
+    postponed: 'Aplazado',
+    canceled: 'Cancelado',
+    noMatch: 'Ningún partido previsto',
+    vs: 'contra',
+    at: 'en casa de',
+    win: 'Victoria',
+    loss: 'Derrota',
+    draw: 'Empate',
+    halftime: 'Descanso',
+    unknown: 'Equipo desconocido',
   },
 };
 
@@ -117,7 +151,7 @@ export function formatStatus(match, { language, timezone }) {
   return `${w.next} · ${formatKickoff(match.kickoff, language, timezone)} · ${formatOpponent(match, language)}`;
 }
 
-/** Both languages at once, for the widgets and the action messages. */
-export function bilingual(build) {
-  return { en: build('en'), fr: build('fr') };
+/** Every language at once, for the widgets and the action messages. */
+export function multilingual(build) {
+  return Object.fromEntries(LANGUAGES.map((language) => [language, build(language)]));
 }

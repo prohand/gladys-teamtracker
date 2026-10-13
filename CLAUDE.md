@@ -50,7 +50,7 @@ src/leagues.js          league codes -> ESPN sport/league paths (codes are store
 src/espn/client.js      the three ESPN endpoints + team logos (fetch injected, timeouts)
 src/espn/parse.js       ESPN JSON -> Match (the team's side: scores, state, result)
 src/events.js           two readings -> the scene events between them (pure)
-src/format.js           status lines and dates, English and French
+src/format.js           status lines and dates, English, French, German and Spanish
 src/tracker.js          the loop: read ESPN, publish devices/states/badges, fire events, pace
 src/store.js            last reading per team, in /data (restart-safe events)
 src/devices/team.js     the device of a followed team (external ids, features, states)
@@ -98,13 +98,13 @@ test/fixtures/          real ESPN answers, trimmed — tests never touch the net
 - **Changelog.** Every user-visible change adds a line under `## [Unreleased]` in
   `CHANGELOG.md` (`### Added`, `Changed`, `Fixed`, `Removed`, `Security`). Never write a
   version heading: the Release workflow moves the section.
-- **Manifest.** Texts are multi-language objects `{ "en": ..., "fr": ... }`, never a
+- **Manifest.** Texts are multi-language objects `{ "en", "fr", "de", "es" }`, never a
   plain string. The catalog `description` holds 10 to 100 characters per language.
   Scene and widget fields require `gladys_version` `>=5.1.0`. `test/manifest.test.js`
   ties the manifest to the code (defaults, actions, triggers, scene action outputs,
   widgets, league list): change both sides together. A new league goes in
   `src/leagues.js` AND in the `find_team` league options.
-- **User-facing text** is bilingual: action messages, widget texts, manifest texts and
-  `docs/en.md` / `docs/fr.md`, kept in sync.
+- **User-facing text** is `{ en, fr, de, es }`: action messages, widget texts, manifest
+  texts; `docs/en.md`, `docs/fr.md`, `docs/de.md`, `docs/es.md` stay in sync.
 - **Style.** Prettier formats, ESLint catches mistakes. Comments explain why, in English.
   Tests never touch the network: add a trimmed real ESPN answer to `test/fixtures/`.

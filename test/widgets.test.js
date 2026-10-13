@@ -65,7 +65,7 @@ test('a live match: live TTL, LIVE badge, valid content', async () => {
   assert.deepEqual(validateWidgetContent(list), []);
   const [first] = list.components[0].items;
   assert.equal(first.title, 'Paris Saint-Germain', 'the live match comes first');
-  assert.deepEqual(first.badge.text, { en: 'LIVE', fr: 'DIRECT' });
+  assert.deepEqual(first.badge.text, { en: 'LIVE', fr: 'DIRECT', de: 'LIVE', es: 'EN DIRECTO' });
 });
 
 test('the score tiles follow the device features once the device exists', async () => {
@@ -99,7 +99,10 @@ test('every button action is handled and answers a short toast', async () => {
         settings: {},
         config,
       });
-      assert.ok(message.en.length <= 200 && message.fr.length <= 200);
+      assert.deepEqual(Object.keys(message), ['en', 'fr', 'de', 'es']);
+      for (const text of Object.values(message)) {
+        assert.ok(text.length <= 200, text);
+      }
       assert.ok(espn.calls.length > calls, 'the button reads ESPN again');
     }
     await assert.rejects(

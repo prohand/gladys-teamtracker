@@ -11,7 +11,8 @@ Proposed on the Gladys forum among the
 [Home Assistant integrations worth porting](https://community.gladysassistant.com/t/integrations-home-assistant-les-plus-populaires-candidates-pour-des-integrations-externes-gladys/10385/35):
 a live-match widget and a "my team scored" trigger.
 
-- **User documentation**: [English](docs/en.md) · [Français](docs/fr.md)
+- **User documentation**: [English](docs/en.md) · [Français](docs/fr.md) ·
+  [Deutsch](docs/de.md) · [Español](docs/es.md)
 - **Requires** Gladys 5.1 or later.
 - **Transport**: cloud (ESPN's internet API).
 
@@ -64,12 +65,12 @@ ESPN public API  ◄─────  │  Team Tracker container            │
 │  ├─ devices/team.js                # the device of a followed team
 │  ├─ leagues.js                     # league codes -> ESPN paths
 │  ├─ config.js                      # defaults, normalization, LEAGUE:TEAM parsing
-│  ├─ format.js                      # status lines and dates (en, fr)
+│  ├─ format.js                      # status lines and dates (en, fr, de, es)
 │  ├─ store.js                       # last readings, in /data
 │  ├─ actions.js                     # Configuration buttons
 │  ├─ scenes.js                      # scene action get_match
 │  └─ widgets.js                     # dashboard widgets + logos
-├─ docs/en.md, docs/fr.md            # user documentation (re-hosted by Gladys)
+├─ docs/{en,fr,de,es}.md            # user documentation (re-hosted by Gladys)
 ├─ test/                             # node --test, ESPN fixtures, no network
 ├─ gladys-assistant-integration.json # manifest
 ├─ Dockerfile                        # Node 24 Alpine, read-only rootfs ready

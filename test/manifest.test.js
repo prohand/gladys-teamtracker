@@ -112,7 +112,10 @@ test('dynamic selects declare a source and no static options', () => {
   }
 });
 
-test('every text is a multi-language object with English and French', () => {
+// Gladys speaks these four: every text the user reads carries each of them.
+const LANGUAGES = ['en', 'fr', 'de', 'es'];
+
+test('every text is a multi-language object in English, French, German and Spanish', () => {
   const texts = [
     manifest.description,
     ...allFields.flatMap((f) => [f.label, f.description, f.placeholder]),
@@ -123,10 +126,13 @@ test('every text is a multi-language object with English and French', () => {
     ...manifest.scene_triggers.flatMap((t) => t.variables.map((v) => v.label)),
     ...manifest.scene_actions.flatMap((a) => a.outputs.map((o) => o.label)),
     ...manifest.widgets.flatMap((w) => [w.label, w.description]),
+    ...manifest.config_schema.flatMap((f) => (f.links ?? []).map((link) => link.label)),
   ].filter((text) => text !== undefined);
   for (const text of texts) {
     assert.equal(typeof text, 'object', JSON.stringify(text));
-    assert.ok(text.en && text.fr, `missing a language in ${JSON.stringify(text)}`);
+    for (const language of LANGUAGES) {
+      assert.ok(text[language], `missing "${language}" in ${JSON.stringify(text)}`);
+    }
   }
 });
 
@@ -135,7 +141,24 @@ test('the manifest version is the package version, and the image is tagged with 
   assert.ok(manifest.docker_image.endsWith(`:${manifest.version}`));
 });
 
+test('the language picker offers every language the integration writes', () => {
+  const field = manifest.config_schema.find((f) => f.key === 'language');
+  assert.deepEqual(
+    field.options.map((option) => option.value),
+    LANGUAGES,
+  );
+});
+
+test('section texts hold 1000 characters at most per language', () => {
+  for (const section of manifest.config_schema.filter((f) => f.type === 'section')) {
+    for (const text of [section.label, section.description].flatMap((t) => Object.values(t))) {
+      assert.ok(text.length <= 1000, `${section.key}: ${text.length}`);
+    }
+  }
+});
+
 test('the catalog description holds 10 to 100 characters per language', () => {
+  assert.deepEqual(Object.keys(manifest.description), LANGUAGES);
   for (const [lang, text] of Object.entries(manifest.description)) {
     assert.ok(text.length >= 10 && text.length <= 100, `description.${lang}: ${text.length}`);
   }

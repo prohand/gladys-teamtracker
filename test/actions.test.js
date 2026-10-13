@@ -18,7 +18,7 @@ function setup(teams) {
   return { espn, tracker };
 }
 
-test('test_teams explains every entry, in both languages', async () => {
+test('test_teams explains every entry, in every language', async () => {
   const { tracker } = setup('LIG1:NICE, LIG1:XYZ, TOP14:STA, NOPE:PSG, LIG1');
   const message = await testTeams(tracker);
   const lines = message.en.split('\n');
@@ -30,6 +30,13 @@ test('test_teams explains every entry, in both languages', async () => {
   assert.match(lines[4], /^LIG1: write it LEAGUE:TEAM/);
   assert.equal(message.fr.split('\n').length, 5);
   assert.match(message.fr, /Terminé · NICE 2 – 1 STR · Victoire/);
+  assert.deepEqual(Object.keys(message), ['en', 'fr', 'de', 'es']);
+  assert.equal(message.de.split('\n').length, 5);
+  assert.match(message.de, /Beendet · NICE 2 – 1 STR · Sieg/);
+  assert.match(message.de, /TOP14:119318 \(La Rochelle\) oder TOP14:25921/);
+  assert.equal(message.es.split('\n').length, 5);
+  assert.match(message.es, /Finalizado · NICE 2 – 1 STR · Victoria/);
+  assert.match(message.es, /^NOPE:PSG: código de liga desconocido/m);
 });
 
 test('test_teams without any team says how to add one', async () => {
