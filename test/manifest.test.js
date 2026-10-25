@@ -64,6 +64,63 @@ test('scene triggers, scene actions, widgets and categories require Gladys >= 5.
   );
 });
 
+test('keywords, countries and music require Gladys >= 5.3.0', () => {
+  if (['keywords', 'countries', 'music'].some((field) => manifest[field] !== undefined)) {
+    assert.ok(
+      isAtLeast(minGladysVersion(), [5, 3, 0]),
+      `got "${manifest.gladys_version}", keywords / countries / music need >=5.3.0`,
+    );
+  }
+});
+
+test('the categories stay inside the vocabulary the store indexes', () => {
+  const vocabulary = [
+    'climate',
+    'lighting',
+    'energy',
+    'security',
+    'multimedia',
+    'appliances',
+    'environment',
+    'protocols',
+    'network',
+    'notifications',
+    'assistants',
+    'services',
+    // Added to the vocabulary in 2026-10.
+    'transport',
+    'vehicles',
+    'servers',
+    'leisure',
+  ];
+  assert.equal(new Set(manifest.categories).size, manifest.categories.length);
+  for (const category of manifest.categories) {
+    assert.ok(vocabulary.includes(category), `unknown category "${category}"`);
+  }
+  // Following sports teams is a pastime: the shelf the store proposes for it.
+  assert.ok(manifest.categories.includes('leisure'));
+});
+
+test('the search keywords follow the store rules', () => {
+  // 1 to 10 unique terms of 2 to 30 characters, compared trimmed and
+  // lowercased. Never displayed: only the catalog search reads them.
+  const { keywords } = manifest;
+  assert.ok(Array.isArray(keywords) && keywords.length >= 1 && keywords.length <= 10);
+  for (const keyword of keywords) {
+    assert.equal(typeof keyword, 'string');
+    const { length } = keyword.trim();
+    assert.ok(length >= 2 && length <= 30, `keyword "${keyword}": ${length} characters`);
+  }
+  const normalized = keywords.map((keyword) => keyword.trim().toLowerCase());
+  assert.equal(new Set(normalized).size, normalized.length, 'keywords must be unique');
+});
+
+test('the leagues followed are worldwide: no countries restriction', () => {
+  // Declaring `countries` would hide the integration from the shelves of
+  // every instance located elsewhere; ESPN covers leagues on every continent.
+  assert.equal(manifest.countries, undefined);
+});
+
 test('every scene trigger the code fires is declared, and vice versa', () => {
   assert.deepEqual(keysOf(manifest.scene_triggers).sort(), Object.values(TRIGGERS).sort());
 });

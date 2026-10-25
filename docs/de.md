@@ -22,7 +22,7 @@ die ausgeführt werden, wenn dein Team punktet oder gewinnt.
 - **Zwei Dashboard-Widgets**: das laufende Spiel eines Teams und die Liste aller deiner
   Teams.
 
-Kein Konto, kein API-Schlüssel, nichts in deinem Netzwerk zu installieren. Gladys 5.1 oder
+Kein Konto, kein API-Schlüssel, nichts in deinem Netzwerk zu installieren. Gladys 5.3 oder
 neuer ist erforderlich.
 
 ## Konfiguration

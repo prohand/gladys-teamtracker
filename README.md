@@ -13,7 +13,7 @@ a live-match widget and a "my team scored" trigger.
 
 - **User documentation**: [English](docs/en.md) · [Français](docs/fr.md) ·
   [Deutsch](docs/de.md) · [Español](docs/es.md)
-- **Requires** Gladys 5.1 or later.
+- **Requires** Gladys 5.3 or later.
 - **Transport**: cloud (ESPN's internet API).
 
 ## What it does

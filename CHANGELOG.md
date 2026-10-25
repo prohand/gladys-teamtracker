@@ -10,6 +10,16 @@ notes of the version's GitHub Release.
 
 ## [Unreleased]
 
+### Added
+
+- Catalog: the integration now also sits on the new **Leisure** shelf, and is found by search
+  terms such as "espn", "soccer", "nfl" or "premier league".
+
+### Changed
+
+- **Gladys 5.3.0 or later is now required** (the catalog search terms need it).
+- SDK `@gladysassistant/integration-sdk` 0.16.
+
 ## [1.1.1] - 2026-10-23
 
 - Maintenance release, no functional change.

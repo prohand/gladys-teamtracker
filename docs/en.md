@@ -21,7 +21,7 @@ when your team scores or wins.
   the lights depending on the result.
 - **Two dashboard widgets**: the live match of one team, and the list of all your teams.
 
-No account, no API key, nothing to install on your network. Gladys 5.1 or later is
+No account, no API key, nothing to install on your network. Gladys 5.3 or later is
 required.
 
 ## Configuration
