@@ -22,7 +22,7 @@ qui se lancent quand votre équipe marque ou gagne.
 - **Deux widgets de tableau de bord** : le match en direct d'une équipe, et la liste de
   toutes vos équipes.
 
-Pas de compte, pas de clé d'API, rien à installer sur votre réseau. Il faut Gladys 5.1 ou
+Pas de compte, pas de clé d'API, rien à installer sur votre réseau. Il faut Gladys 5.3 ou
 plus récent.
 
 ## Configuration

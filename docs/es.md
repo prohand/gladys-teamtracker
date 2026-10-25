@@ -23,7 +23,7 @@ escenas que se ejecutan cuando su equipo marca o gana.
 - **Dos widgets de panel**: el partido en directo de un equipo y la lista de todos sus
   equipos.
 
-Sin cuenta, sin clave de API, nada que instalar en su red. Se requiere Gladys 5.1 o
+Sin cuenta, sin clave de API, nada que instalar en su red. Se requiere Gladys 5.3 o
 posterior.
 
 ## Configuración

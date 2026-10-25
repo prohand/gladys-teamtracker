@@ -14,10 +14,10 @@ started from the official JavaScript template
 and uses the same workflows as [prohand/gladys-devmel](https://github.com/prohand/gladys-devmel).
 
 The user writes `LEAGUE:TEAM` entries (`LIG1:PSG, NFL:KC`). Each team becomes a device
-(team score, opponent score, a "Match" status text). Gladys 5.1+ adds five scene
-triggers (match soon, started, team scored, opponent scored, ended), one scene action
-(`get_match`) and two widgets (`team_match`, `my_teams`). Manifest `transports:
-["cloud"]`: ESPN is an internet API, nothing runs on the LAN.
+(team score, opponent score, a "Match" status text), plus five scene triggers (match soon,
+started, team scored, opponent scored, ended), one scene action (`get_match`) and two widgets
+(`team_match`, `my_teams`). Gladys 5.3+ is required (the manifest `keywords` need it). Manifest
+`transports: ["cloud"]`: ESPN is an internet API, nothing runs on the LAN.
 
 ## Commands
 
@@ -100,7 +100,9 @@ test/fixtures/          real ESPN answers, trimmed — tests never touch the net
   version heading: the Release workflow moves the section.
 - **Manifest.** Texts are multi-language objects `{ "en", "fr", "de", "es" }`, never a
   plain string. The catalog `description` holds 10 to 100 characters per language.
-  Scene and widget fields require `gladys_version` `>=5.1.0`. `test/manifest.test.js`
+  Scene and widget fields require `gladys_version` `>=5.1.0`, `keywords` (1–10 unique
+  terms of 2–30 characters) `>=5.3.0`; no `countries`: the leagues followed are worldwide.
+  `categories` (1–3) include `leisure`. `test/manifest.test.js`
   ties the manifest to the code (defaults, actions, triggers, scene action outputs,
   widgets, league list): change both sides together. A new league goes in
   `src/leagues.js` AND in the `find_team` league options.
