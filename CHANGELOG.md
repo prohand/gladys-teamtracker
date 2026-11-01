@@ -10,6 +10,8 @@ notes of the version's GitHub Release.
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-11-01
+
 ### Added
 
 - Rugby: European Champions Cup (`ERCC`), Challenge Cup (`ERCH`), Nations Championship
@@ -80,7 +82,8 @@ notes of the version's GitHub Release.
   ESLint, tests on Node 22 and 24, store checks and Docker build on pull requests) and
   UI-driven releases.
 
-[Unreleased]: https://github.com/prohand/gladys-teamtracker/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/prohand/gladys-teamtracker/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/prohand/gladys-teamtracker/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/prohand/gladys-teamtracker/compare/v1.1.1...v1.2.0
 [1.1.1]: https://github.com/prohand/gladys-teamtracker/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/prohand/gladys-teamtracker/compare/v1.0.2...v1.1.0
