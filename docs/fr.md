@@ -67,7 +67,7 @@ d'une actualisation courte pour voir le début d'un match.
 | `LIG1`  | Ligue 1                 | `RWC`   | Coupe du monde de rugby     |
 | `LIG2`  | Ligue 2                 | `ERCC`  | Champions Cup               |
 | `CDF`   | Coupe de France         | `ERCH`  | Challenge Cup               |
-| `D1F`   | Première Ligue (femmes) | `NATC`  | Nations Championship        |
+| `D1F`   | Première Ligue (femmes) | `NATC`  | Championnat des nations     |
 | `EPL`   | Premier League          | `TEST`  | Tests matchs internationaux |
 | `LIGA`  | LaLiga                  | `NFL`   | NFL                         |
 | `SERA`  | Serie A                 | `NCAAF` | NCAA Football               |
