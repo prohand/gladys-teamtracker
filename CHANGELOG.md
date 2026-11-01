@@ -10,6 +10,11 @@ notes of the version's GitHub Release.
 
 ## [Unreleased]
 
+### Added
+
+- Rugby: European Champions Cup (`ERCC`), Challenge Cup (`ERCH`), Nations Championship
+  (`NATC`) and international test matches (`TEST`).
+
 ## [1.2.0] - 2026-10-25
 
 ### Added

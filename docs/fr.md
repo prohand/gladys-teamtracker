@@ -62,21 +62,23 @@ d'une actualisation courte pour voir le début d'un match.
 
 ## Ligues
 
-| Code   | Ligue                   | Code    | Ligue                   |
-| ------ | ----------------------- | ------- | ----------------------- |
-| `LIG1` | Ligue 1                 | `TOP14` | Top 14                  |
-| `LIG2` | Ligue 2                 | `SIXN`  | Six Nations             |
-| `CDF`  | Coupe de France         | `RWC`   | Coupe du monde de rugby |
-| `D1F`  | Première Ligue (femmes) | `NFL`   | NFL                     |
-| `EPL`  | Premier League          | `NCAAF` | NCAA Football           |
-| `LIGA` | LaLiga                  | `NBA`   | NBA                     |
-| `SERA` | Serie A                 | `WNBA`  | WNBA                    |
-| `BUND` | Bundesliga              | `NCAAM` | NCAA basket masculin    |
-| `CL`   | Ligue des champions     | `NCAAW` | NCAA basket féminin     |
-| `EL`   | Ligue Europa            | `NHL`   | NHL                     |
-| `ECL`  | Ligue Conférence        | `MLB`   | MLB                     |
-| `MLS`  | MLS                     | `WC`    | Coupe du monde FIFA     |
-| `NWSL` | NWSL                    | `WWC`   | Coupe du monde féminine |
+| Code    | Ligue                   | Code    | Ligue                       |
+| ------- | ----------------------- | ------- | --------------------------- |
+| `LIG1`  | Ligue 1                 | `RWC`   | Coupe du monde de rugby     |
+| `LIG2`  | Ligue 2                 | `ERCC`  | Champions Cup               |
+| `CDF`   | Coupe de France         | `ERCH`  | Challenge Cup               |
+| `D1F`   | Première Ligue (femmes) | `NATC`  | Nations Championship        |
+| `EPL`   | Premier League          | `TEST`  | Tests matchs internationaux |
+| `LIGA`  | LaLiga                  | `NFL`   | NFL                         |
+| `SERA`  | Serie A                 | `NCAAF` | NCAA Football               |
+| `BUND`  | Bundesliga              | `NBA`   | NBA                         |
+| `CL`    | Ligue des champions     | `WNBA`  | WNBA                        |
+| `EL`    | Ligue Europa            | `NCAAM` | NCAA basket masculin        |
+| `ECL`   | Ligue Conférence        | `NCAAW` | NCAA basket féminin         |
+| `MLS`   | MLS                     | `NHL`   | NHL                         |
+| `NWSL`  | NWSL                    | `MLB`   | MLB                         |
+| `TOP14` | Top 14                  | `WC`    | Coupe du monde FIFA         |
+| `SIXN`  | Six Nations             | `WWC`   | Coupe du monde féminine     |
 
 **Une autre ligue ?** Toute ligue d'équipes d'ESPN marche avec ses deux segments de
 chemin à la place d'un code : `soccer/por.1:SLB` (Liga Portugal), `soccer/ned.1:AJA`

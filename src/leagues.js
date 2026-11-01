@@ -35,6 +35,10 @@ export const LEAGUES = {
   TOP14: { sport: 'rugby', league: '270559', name: 'Top 14' },
   SIXN: { sport: 'rugby', league: '180659', name: 'Six Nations' },
   RWC: { sport: 'rugby', league: '164205', name: 'Rugby World Cup' },
+  ERCC: { sport: 'rugby', league: '271937', name: 'Champions Cup' },
+  ERCH: { sport: 'rugby', league: '272073', name: 'Challenge Cup' },
+  NATC: { sport: 'rugby', league: '17567', name: 'Nations Championship' },
+  TEST: { sport: 'rugby', league: '289234', name: 'International Test Matches' },
   // North American leagues.
   NFL: { sport: 'football', league: 'nfl', name: 'NFL' },
   NCAAF: { sport: 'football', league: 'college-football', name: 'NCAA Football' },

@@ -3,7 +3,8 @@
 External integration for [Gladys Assistant](https://gladysassistant.com) that follows
 your sports teams: live scores, the next match, and scenes that run when your team
 scores or wins. Soccer (Ligue 1, Premier League, Champions League…), rugby (Top 14, Six
-Nations), NFL, NBA, NHL, MLB and more, from the public ESPN API — no account, no key.
+Nations, Champions Cup, test matches…), NFL, NBA, NHL, MLB and more, from the public
+ESPN API — no account, no key.
 
 ![Team Tracker](cover.png)
 

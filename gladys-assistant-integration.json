@@ -426,6 +426,42 @@
               }
             },
             {
+              "value": "ERCC",
+              "label": {
+                "en": "Champions Cup (ERCC)",
+                "fr": "Champions Cup (ERCC)",
+                "de": "Champions Cup (ERCC)",
+                "es": "Champions Cup (ERCC)"
+              }
+            },
+            {
+              "value": "ERCH",
+              "label": {
+                "en": "Challenge Cup (ERCH)",
+                "fr": "Challenge Cup (ERCH)",
+                "de": "Challenge Cup (ERCH)",
+                "es": "Challenge Cup (ERCH)"
+              }
+            },
+            {
+              "value": "NATC",
+              "label": {
+                "en": "Nations Championship (NATC)",
+                "fr": "Nations Championship (NATC)",
+                "de": "Nations Championship (NATC)",
+                "es": "Nations Championship (NATC)"
+              }
+            },
+            {
+              "value": "TEST",
+              "label": {
+                "en": "International test matches (TEST)",
+                "fr": "Tests matchs internationaux (TEST)",
+                "de": "Internationale Testspiele (TEST)",
+                "es": "Test matches internacionales (TEST)"
+              }
+            },
+            {
               "value": "NFL",
               "label": {
                 "en": "NFL (NFL)",
