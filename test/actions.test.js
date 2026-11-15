@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { findTeams, testTeams } from '../src/actions.js';
 import { normalizeConfig } from '../src/config.js';
 import { Tracker } from '../src/tracker.js';
-import { createFakeEspn } from './helpers/fakeEspn.js';
+import { createFakeEspn, fixture } from './helpers/fakeEspn.js';
 import { createFakeGladys } from './helpers/fakeGladys.js';
 
 function setup(teams) {
@@ -71,4 +71,11 @@ test('find_team reads the team list once a day at most', async () => {
   assert.equal(espn.calls.filter((c) => c === 'teams soccer/fra.1').length, 1);
   espn.failing = true;
   assert.match((await findTeams(tracker, { league: 'TOP14' })).en, /ESPN did not answer/);
+});
+
+test('find_team also lists the teams of the scoreboard (promoted, missing from ESPN list)', async () => {
+  const { espn, tracker } = setup('');
+  espn.scoreboards['rugby/270559'] = fixture('top14-scoreboard');
+  const vannes = await findTeams(tracker, { league: 'TOP14', search: 'vannes' });
+  assert.match(vannes.en, /TOP14:VAN — Vannes/);
 });

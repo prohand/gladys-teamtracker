@@ -1,0 +1,133 @@
+{
+  "leagues": [
+    {
+      "id": "8005",
+      "name": "French Top 14",
+      "abbreviation": "TOP14"
+    }
+  ],
+  "events": [
+    {
+      "id": "604427",
+      "date": "2026-11-28T15:35Z",
+      "name": "La Rochelle vs Perpignan",
+      "shortName": "STA VS USA",
+      "status": {
+        "type": {
+          "name": "STATUS_SCHEDULED",
+          "state": "pre",
+          "completed": false,
+          "description": "Scheduled",
+          "detail": "Sat, November 28th at 10:35 AM EST",
+          "shortDetail": "11/28 - 10:35 AM EST"
+        }
+      },
+      "competitions": [
+        {
+          "id": "604427",
+          "date": "2026-11-28T15:35Z",
+          "status": {
+            "type": {
+              "name": "STATUS_SCHEDULED",
+              "state": "pre",
+              "completed": false,
+              "description": "Scheduled",
+              "detail": "Sat, November 28th at 10:35 AM EST",
+              "shortDetail": "11/28 - 10:35 AM EST"
+            }
+          },
+          "venue": {
+            "fullName": "Stade Marcel-Deflandre"
+          },
+          "competitors": [
+            {
+              "id": "119318",
+              "homeAway": "home",
+              "score": "0",
+              "team": {
+                "id": "119318",
+                "abbreviation": "STA",
+                "displayName": "La Rochelle",
+                "shortDisplayName": "La Rochelle",
+                "logo": "https://a.espncdn.com/i/teamlogos/rugby/teams/500/119318.png"
+              }
+            },
+            {
+              "id": "25920",
+              "homeAway": "away",
+              "score": "0",
+              "team": {
+                "id": "25920",
+                "abbreviation": "USA",
+                "displayName": "Perpignan",
+                "shortDisplayName": "Perpignan",
+                "logo": "https://a.espncdn.com/i/teamlogos/countries/500/usa.png"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "604429",
+      "date": "2026-11-28T15:35Z",
+      "name": "Stade Francais Paris vs Vannes",
+      "shortName": "STA VS VAN",
+      "status": {
+        "type": {
+          "name": "STATUS_SCHEDULED",
+          "state": "pre",
+          "completed": false,
+          "description": "Scheduled",
+          "detail": "Sat, November 28th at 10:35 AM EST",
+          "shortDetail": "11/28 - 10:35 AM EST"
+        }
+      },
+      "competitions": [
+        {
+          "id": "604429",
+          "date": "2026-11-28T15:35Z",
+          "status": {
+            "type": {
+              "name": "STATUS_SCHEDULED",
+              "state": "pre",
+              "completed": false,
+              "description": "Scheduled",
+              "detail": "Sat, November 28th at 10:35 AM EST",
+              "shortDetail": "11/28 - 10:35 AM EST"
+            }
+          },
+          "venue": {
+            "fullName": "Stade Jean Bouin"
+          },
+          "competitors": [
+            {
+              "id": "25921",
+              "homeAway": "home",
+              "score": "0",
+              "team": {
+                "id": "25921",
+                "abbreviation": "STA",
+                "displayName": "Stade Francais Paris",
+                "shortDisplayName": "Stade Francais Paris",
+                "logo": "https://a.espncdn.com/i/teamlogos/rugby/teams/500/25921.png"
+              }
+            },
+            {
+              "id": "289337",
+              "homeAway": "away",
+              "score": "0",
+              "team": {
+                "id": "289337",
+                "abbreviation": "VAN",
+                "displayName": "Vannes",
+                "shortDisplayName": "Vannes",
+                "logo": "https://a.espncdn.com/i/teamlogos/countries/500/van.png"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

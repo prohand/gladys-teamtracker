@@ -4,6 +4,8 @@ import {
   findMatchInScoreboard,
   findTeam,
   matchFromEvent,
+  mergeTeams,
+  parseScoreboardTeams,
   parseTeamDetail,
   parseTeamsList,
 } from '../src/espn/parse.js';
@@ -102,4 +104,15 @@ test('a team page gives the team and its next match', () => {
   assert.equal(match.homeAway, 'away');
   assert.equal(match.opponent.abbreviation, 'STR');
   assert.deepEqual(parseTeamDetail({}), { team: null, match: null });
+});
+
+test('the teams of a scoreboard complete a team list, without duplicates', () => {
+  const list = parseTeamsList(fixture('top14-teams'));
+  const playing = parseScoreboardTeams(fixture('top14-scoreboard'));
+  assert.ok(playing.some((team) => team.id === '289337' && team.abbreviation === 'VAN'));
+  const merged = mergeTeams(list, playing);
+  assert.equal(merged.length, list.length + 1, 'only Vannes is new');
+  assert.equal(findTeam(merged, 'VAN').team.name, 'Vannes');
+  assert.deepEqual(parseScoreboardTeams(null), []);
+  assert.deepEqual(parseScoreboardTeams({ events: [{}] }), []);
 });

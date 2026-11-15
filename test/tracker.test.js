@@ -306,3 +306,44 @@ test('a fresh refresh asked during a reading runs another one after it', async (
   await Promise.all([tracker.refresh(), tracker.refresh({ fresh: true })]);
   assert.equal(espn.calls.filter((c) => c.startsWith('scoreboard')).length, 2);
 });
+
+// ESPN's Top 14 team list of 2026-27 still holds Oyonnax, not the promoted
+// Vannes, which only the calendar knows (real answers, trimmed).
+test('a team missing from ESPN team list is found on the scoreboard', async () => {
+  const { gladys, espn, tracker } = setup({ teams: 'TOP14:VAN', now: '2026-11-15T12:00Z' });
+  espn.scoreboards['rugby/270559'] = fixture('top14-scoreboard');
+  await tracker.refresh();
+
+  const [van] = tracker.list();
+  assert.equal(van.resolveError, null);
+  assert.equal(van.info.id, '289337');
+  assert.equal(van.info.name, 'Vannes');
+  assert.equal(van.match.opponent.name, 'Stade Francais Paris');
+  assert.deepEqual(espn.calls, ['teams rugby/270559', 'scoreboard rugby/270559']);
+  assert.equal(gladys.discovered.at(-1).length, 1);
+});
+
+test('an id missing from every list is read from the team page, once a day at most', async () => {
+  const { espn, tracker } = setup({ teams: 'TOP14:289337', now: '2026-11-15T12:00Z' });
+  espn.scoreboards['rugby/270559'] = { events: [] };
+  espn.teamPages['rugby/270559/289337'] = {
+    team: { id: '289337', abbreviation: 'VAN', displayName: 'Vannes', nextEvent: [] },
+  };
+  await tracker.refresh();
+  const [van] = tracker.list();
+  assert.equal(van.info.name, 'Vannes');
+  assert.equal(van.match, null, 'no next match known');
+  assert.equal(espn.calls.filter((c) => c === 'team rugby/270559/289337').length, 1);
+
+  // A wrong id: one try, then not again before the next day.
+  const wrong = setup({ teams: 'TOP14:999', now: '2026-11-15T12:00Z' });
+  wrong.espn.scoreboards['rugby/270559'] = { events: [] };
+  await wrong.tracker.refresh();
+  await wrong.tracker.refresh();
+  assert.equal(wrong.tracker.list()[0].resolveError, 'not_found');
+  const lookups = () => wrong.espn.calls.filter((c) => c === 'team rugby/270559/999').length;
+  assert.equal(lookups(), 1);
+  wrong.clock.now += 25 * 60 * 60 * 1000;
+  await wrong.tracker.refresh();
+  assert.equal(lookups(), 2);
+});
