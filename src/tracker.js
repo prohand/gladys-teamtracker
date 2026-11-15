@@ -18,7 +18,14 @@
 
 import { createLogger, DEVICE_TRANSPORTS } from '@gladysassistant/integration-sdk';
 import { parseTeams } from './config.js';
-import { findMatchInScoreboard, findTeam, parseTeamDetail, parseTeamsList } from './espn/parse.js';
+import {
+  findMatchInScoreboard,
+  findTeam,
+  mergeTeams,
+  parseScoreboardTeams,
+  parseTeamDetail,
+  parseTeamsList,
+} from './espn/parse.js';
 import { detectEvents, eventData } from './events.js';
 import { formatStatus } from './format.js';
 import { leagueKey } from './leagues.js';
@@ -276,30 +283,17 @@ export class Tracker {
     const { sport, league } = group[0].spec;
     const now = this.now();
 
-    // 1) Turn what the user typed into ESPN team ids.
+    // 1) The league's teams, to turn what the user typed into ESPN team ids.
+    let list = null;
     if (group.some((t) => !t.info)) {
-      const list = await this.teamsList(key, sport, league, now);
-      for (const tracked of group.filter((t) => !t.info)) {
-        if (!list) {
+      list = await this.teamsList(key, sport, league, now);
+      if (!list) {
+        for (const tracked of group.filter((t) => !t.info)) {
           tracked.resolveError = 'unreachable';
-          continue;
-        }
-        const found = findTeam(list, tracked.spec.team);
-        const before = tracked.resolveError;
-        tracked.resolveError = found.error ?? null;
-        tracked.candidates = found.candidates ?? [];
-        if (found.team) {
-          tracked.info = found.team;
-          logger.info(`${tracked.spec.entry} is ${found.team.name} (ESPN id ${found.team.id})`);
-        } else if (found.error !== before) {
-          // Once per problem, not at every reading.
-          logger.warn(`${tracked.spec.entry}: team ${found.error} in ${tracked.spec.leagueName}`);
         }
       }
     }
-
-    const resolved = group.filter((t) => t.info);
-    if (resolved.length === 0) {
+    if (!list && !group.some((t) => t.info)) {
       return [];
     }
 
@@ -310,6 +304,16 @@ export class Tracker {
     } catch (err) {
       logger.warn(`${group[0].spec.leagueName}: scoreboard unavailable (${err.message})`);
     }
+
+    if (list) {
+      // ESPN's team list lags behind promotions: the teams on the calendar
+      // complete it (no extra request, the scoreboard is read anyway).
+      const teams = mergeTeams(list, parseScoreboardTeams(scoreboard));
+      for (const tracked of group.filter((t) => !t.info)) {
+        await this.resolve(tracked, teams, now);
+      }
+    }
+    const resolved = group.filter((t) => t.info);
 
     const events = [];
     for (const tracked of resolved) {
@@ -332,6 +336,61 @@ export class Tracker {
       events.push(...this.apply(tracked, match, now));
     }
     return events;
+  }
+
+  /** Turn what the user typed into an ESPN team (`tracked.info`). */
+  async resolve(tracked, teams, now) {
+    let found = findTeam(teams, tracked.spec.team);
+    // An id that no list holds (a promoted team, not playing today): ask its
+    // own page, once a day at most, so a wrong id does not cost a request
+    // at every reading.
+    const query = tracked.spec.team.trim();
+    if (
+      found.error === 'not_found' &&
+      /^\d+$/.test(query) &&
+      !(now - (tracked.idLookupAt ?? -Infinity) < TEAMS_LIST_TTL)
+    ) {
+      tracked.idLookupAt = now;
+      try {
+        const parsed = parseTeamDetail(
+          await this.client.team(tracked.spec.sport, tracked.spec.league, query),
+        );
+        if (parsed.team?.id === query) {
+          found = { team: parsed.team };
+          tracked.detail = { match: parsed.match, fetchedAt: now };
+        }
+      } catch (err) {
+        logger.warn(`${tracked.spec.entry}: team page unavailable (${err.message})`);
+      }
+    }
+    const before = tracked.resolveError;
+    tracked.resolveError = found.error ?? null;
+    tracked.candidates = found.candidates ?? [];
+    if (found.team) {
+      tracked.info = found.team;
+      logger.info(`${tracked.spec.entry} is ${found.team.name} (ESPN id ${found.team.id})`);
+    } else if (found.error !== before) {
+      // Once per problem, not at every reading.
+      logger.warn(`${tracked.spec.entry}: team ${found.error} in ${tracked.spec.leagueName}`);
+    }
+  }
+
+  /**
+   * The teams of a league for the `find_team` action: ESPN's list plus the
+   * teams of the current scoreboard (see readLeague). Null when unreachable.
+   */
+  async leagueTeams(key, sport, league, now) {
+    const list = await this.teamsList(key, sport, league, now);
+    if (!list) {
+      return null;
+    }
+    let scoreboard = null;
+    try {
+      scoreboard = await this.client.scoreboard(sport, league);
+    } catch (err) {
+      logger.warn(`${key}: scoreboard unavailable (${err.message})`);
+    }
+    return mergeTeams(list, parseScoreboardTeams(scoreboard));
   }
 
   async teamsList(key, sport, league, now) {

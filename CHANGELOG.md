@@ -10,6 +10,12 @@ notes of the version's GitHub Release.
 
 ## [Unreleased]
 
+### Fixed
+
+- Rugby: a team promoted this season (RC Vannes in the Top 14) is found, by its abbreviation,
+  its ESPN id or **Find a team**: ESPN's team list still holds last season's clubs, the teams
+  on the league's calendar now complete it.
+
 ## [1.3.0] - 2026-11-01
 
 ### Added

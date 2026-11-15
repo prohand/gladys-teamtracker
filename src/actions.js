@@ -139,7 +139,12 @@ export async function findTeams(tracker, fields) {
     };
   }
   logger.info(`Action find_team <- ${league.code} "${fields.search ?? ''}"`);
-  const teams = await tracker.teamsList(leagueKey(league), league.sport, league.league, Date.now());
+  const teams = await tracker.leagueTeams(
+    leagueKey(league),
+    league.sport,
+    league.league,
+    Date.now(),
+  );
   if (!teams) {
     return { ...REASONS.unreachable };
   }

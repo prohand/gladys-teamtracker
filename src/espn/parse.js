@@ -52,6 +52,31 @@ export function parseTeamsList(json) {
 }
 
 /**
+ * The teams playing the matches of a scoreboard. ESPN's `teams` list lags
+ * behind promotions (in the 2026-27 Top 14 it still holds Oyonnax, not
+ * Vannes), while the calendar is right: its teams complete the list.
+ */
+export function parseScoreboardTeams(json) {
+  return (json?.events ?? [])
+    .flatMap((event) => event?.competitions?.[0]?.competitors ?? [])
+    .map((competitor) => readTeam(competitor?.team))
+    .filter((team) => team.id);
+}
+
+/** `list`, plus the teams of `others` it does not hold (same id). */
+export function mergeTeams(list, others) {
+  const merged = [...list];
+  const ids = new Set(list.map((team) => team.id));
+  for (const team of others) {
+    if (!ids.has(team.id)) {
+      ids.add(team.id);
+      merged.push(team);
+    }
+  }
+  return merged;
+}
+
+/**
  * Find the team the user wrote: its ESPN id, or its abbreviation when only one
  * team of the league carries it (Top 14 has three "STA").
  * @returns {{ team?: object, error?: 'not_found' | 'ambiguous', candidates?: object[] }}
