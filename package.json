@@ -1,6 +1,6 @@
 {
   "name": "gladys-teamtracker",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "private": true,
   "description": "Gladys Assistant external integration that follows your sports teams: live scores, next match, goal triggers.",
   "type": "module",
